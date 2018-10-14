@@ -13,6 +13,7 @@ const routes = require("./app/routes");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
+const secret = require("./secret");
 
 app.prepare().then(() => {
 	const server = express();
@@ -32,7 +33,7 @@ app.prepare().then(() => {
 	require("./app/config/passport")(passport);
 	server.use(cookieParser());
 	server.use(bodyParser());
-	server.use(session({ secret: "gfasdfgasdfg" }));
+	server.use(session({ secret }));
 	server.use(passport.initialize());
 	server.use(passport.session());
 	routes(server, passport);
