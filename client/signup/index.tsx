@@ -81,7 +81,7 @@ const SignupFormik = withFormik<SignupType, SignupType>({
 			.min(6, "Passwords must be at least 6 characters.")
 			.required("Password is required.")
 	}),
-	displayName: "Ponent"
+	displayName: "Sign up"
 })(SignupForm as any);
 
 const mapDispatchToProps = dispatch => {
