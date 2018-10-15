@@ -22,10 +22,13 @@ module.exports = function(passport) {
 				passReqToCallback: true
 			},
 			(req, username, password, done) => {
+				console.log({ req });
 				process.nextTick(() => {
+					console.log({ req });
 					User.findOne({ username: username }, (err, user) => {
+						console.log({ err });
+						console.log({ user });
 						if (err) return done(err);
-
 						if (user) {
 							return done(null, false, {
 								message: "username already exists"
@@ -40,7 +43,6 @@ module.exports = function(passport) {
 										});
 									} else {
 										const newUser = new User();
-
 										newUser.username = req.body.username;
 										newUser.password = newUser.generateHash(
 											password
@@ -69,7 +71,10 @@ module.exports = function(passport) {
 				passReqToCallback: true
 			},
 			(req, username, password, done) => {
-				User.findOne({ username: username }, function(err, user) {
+				console.log("hi");
+
+				User.findOne({ username }, function(err, user) {
+					console.log("hi");
 					if (err) return done(err);
 
 					if (!user)

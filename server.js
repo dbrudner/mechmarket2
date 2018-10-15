@@ -7,29 +7,28 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const session = require("express-session");
 const path = require("path");
-const dbname = "testdb";
-const developmentUrl = `mongodb://localhost/${dbname}`;
+const developmentUrl = "mongodb://localhost/testdb";
 const routes = require("./app/routes");
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler();
 const secret = require("./secret");
 
+if (process.env.MONGODB_URI) {
+	mongoose.connect(process.env.MONGODB_URI);
+} else {
+	mongoose.connect(
+		developmentUrl,
+		function(err) {
+			if (err) throw err;
+			console.log("connected");
+		}
+	);
+}
+
 app.prepare().then(() => {
 	const server = express();
 
-	if (process.env.MONGODB_URI) {
-		mongoose.connect(process.env.MONGODB_URI);
-	} else {
-		mongoose.connect(
-			developmentUrl,
-			function(err) {
-				console.log("connected");
-			}
-		);
-	}
-
-	server.use(express.static(path.join(__dirname, "react/build")));
 	require("./app/config/passport")(passport);
 	server.use(cookieParser());
 	server.use(bodyParser());

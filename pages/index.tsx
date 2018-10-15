@@ -1,3 +1,10 @@
-const IndexPage = () => <h1>Testing Next.js App written in TypeScript with Jest</h1>;
+import Signup from "../client/signup";
+
+const IndexPage = () => (
+	<div style={{ margin: "10%" }}>
+		<h1>Sign up</h1>
+		<Signup />
+	</div>
+);
 
 export default IndexPage;
