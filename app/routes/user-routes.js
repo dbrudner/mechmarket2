@@ -6,7 +6,6 @@ const bodyParser = require("body-parser");
 const keyboardRoutes = require("./keyboard-routes");
 
 module.exports = {
-	// Signup
 	signup: function(app, passport, route) {
 		app.post(route, passport.authenticate("local-signup"), (req, res) => {
 			res.json("signing up");
@@ -19,14 +18,12 @@ module.exports = {
 		});
 	},
 
-	// Logout
 	logout: function(app, route) {
 		app.get(route, (req, res) => {
 			res.json("logging out");
 		});
 	},
 
-	// Used to find if user is logged in
 	test: function(app, route) {
 		app.get(route, function(req, res) {
 			res.json(req.user);
