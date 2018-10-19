@@ -13,7 +13,7 @@ const createAsyncMiddleware = (route, method, actionType, successAction) => {
 				method === "POST"
 					? await axios.post(route, action.payload)
 					: await axios.get(route);
-			next({ type: successAction, payload: await res.data });
+			await next({ type: successAction, payload: await res.data });
 		}
 		return next(action);
 	};

@@ -1,21 +1,23 @@
 import { Radio } from "antd";
 import { LayoutType } from "./index";
 
+const { Group, Button } = Radio;
+
 type LayoutProps = {
 	handleChange: (value) => void;
 	selectedLayout: LayoutType;
 };
 
 const Layout: React.SFC<LayoutProps> = ({ handleChange, selectedLayout }) => (
-	<Radio.Group
+	<Group
 		onChange={e => handleChange(e.target.value)}
 		defaultValue="a"
 		buttonStyle="solid"
 		value={selectedLayout}
 	>
-		<Radio.Button value="ANSI">ANSI</Radio.Button>
-		<Radio.Button value="ISO">ISO</Radio.Button>
-	</Radio.Group>
+		<Button value="ANSI">ANSI</Button>
+		<Button value="ISO">ISO</Button>
+	</Group>
 );
 
 export default Layout;

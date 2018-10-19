@@ -6,6 +6,7 @@ import * as actions from "./duck";
 type KeycapsProps = {
 	handleChange: () => void;
 	fetchKeycaps: () => void;
+	keycaps: string[];
 };
 
 type KeycapsState = {
@@ -13,20 +14,13 @@ type KeycapsState = {
 };
 
 class Keycaps extends React.Component<KeycapsProps, KeycapsState> {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			dataSource: ["12345", "23456", "34567", "9"]
-		};
-	}
-
 	componentDidMount() {
 		this.props.fetchKeycaps();
 	}
 
 	render() {
-		return <AutoComplete dataSource={this.state.dataSource} />;
+		console.log(this.props.keycaps);
+		return <AutoComplete dataSource={["blah"]} />;
 	}
 }
 
