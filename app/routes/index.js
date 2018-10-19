@@ -1,18 +1,21 @@
-const userRoutes = require("./user-routes");
-const keyboardRoutes = require("./keyboard-routes");
+const user = require("./user-routes");
+const keyboard = require("./keyboard-routes");
+const fetchParts = require("./fetch-parts-routes");
 
 module.exports = function(app, passport) {
-	keyboardRoutes.getAllKeyboards(app, "/api/keyboards/all");
+	fetchParts.getKeycaps(app, "/api/keycaps");
 
-	keyboardRoutes.postKeyboard(app, "/api/new/keyboard");
+	keyboard.getAllKeyboards(app, "/api/keyboards/all");
 
-	keyboardRoutes.getOneKeyboard(app, "/api/keyboard/:id");
+	keyboard.postKeyboard(app, "/api/new/keyboard");
 
-	userRoutes.test(app, "/api/test");
+	keyboard.getOneKeyboard(app, "/api/keyboard/:id");
 
-	userRoutes.logout(app, "/api/logout");
+	user.test(app, "/api/test");
 
-	userRoutes.login(app, passport, "/api/login");
+	user.logout(app, "/api/logout");
 
-	userRoutes.signup(app, passport, "/api/signup");
+	user.login(app, passport, "/api/login");
+
+	user.signup(app, passport, "/api/signup");
 };

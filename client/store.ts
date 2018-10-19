@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { loginReducer } from "./signup/duck";
-import { fetchMiddleware } from "../client/middleware/async-middleware";
+import { fetchKeycaps, signUp } from "../client/common/middleware/async";
 
 const rootReducer = combineReducers({
 	user: loginReducer
@@ -10,6 +10,6 @@ const rootReducer = combineReducers({
 export function initializeStore() {
 	return createStore(
 		rootReducer,
-		composeWithDevTools(applyMiddleware(fetchMiddleware))
+		composeWithDevTools(applyMiddleware(fetchKeycaps, signUp))
 	);
 }

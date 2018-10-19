@@ -1,14 +1,17 @@
 import * as React from "react";
 import { Radio } from "antd";
-import { KeyboardSize } from "../index";
+import { SizeType } from "./index";
 
 type SizeTypeProps = {
 	handleChange: (value) => void;
-	selected: KeyboardSize;
+	selectedSize: SizeType;
 };
 
-const Size: React.SFC<SizeTypeProps> = ({ handleChange, selected }) => (
-	<Radio.Group onChange={e => handleChange(e.target.value)} value={selected}>
+const Size: React.SFC<SizeTypeProps> = ({ handleChange, selectedSize }) => (
+	<Radio.Group
+		onChange={e => handleChange(e.target.value)}
+		value={selectedSize}
+	>
 		<Radio value="Full">Full</Radio>
 		<Radio value="TKL">TKL</Radio>
 		<Radio value="75%">75%</Radio>

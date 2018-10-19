@@ -86,7 +86,7 @@ const SignupFormik = withFormik<SignupType, SignupType>({
 
 const mapDispatchToProps = dispatch => {
 	return {
-		signup: payload => dispatch({ type: actions.SIGNING_UP, payload }),
+		signup: payload => dispatch({ type: actions.SIGN_UP, payload }),
 		dispatch
 	};
 };

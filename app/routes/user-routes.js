@@ -1,9 +1,4 @@
-// app/routes.js
-const path = require("path");
 const db = require("../models/index");
-const bodyParser = require("body-parser");
-
-const keyboardRoutes = require("./keyboard-routes");
 
 module.exports = {
 	signup: function(app, passport, route) {
