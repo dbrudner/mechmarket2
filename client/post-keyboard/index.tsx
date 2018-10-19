@@ -33,20 +33,16 @@ export default class PostKeyboard extends React.Component<
 		return (
 			<div>
 				<h1>Post a keyboard</h1>
-				<div>
-					<h2>Size</h2>
-					<Size
-						selectedSize={this.state.size}
-						handleChange={size => this.setState({ size })}
-					/>
-				</div>
-				<div>
-					<h2>Layout</h2>
-					<Layout
-						selectedLayout={this.state.layout}
-						handleChange={layout => this.setState({ layout })}
-					/>
-				</div>
+				<h2>Size</h2>
+				<Size
+					selectedSize={this.state.size}
+					handleChange={size => this.setState({ size })}
+				/>
+				<h2>Layout</h2>
+				<Layout
+					selectedLayout={this.state.layout}
+					handleChange={layout => this.setState({ layout })}
+				/>
 				<div style={{ margin: "20px 0" }}>
 					<Keycaps />
 				</div>
