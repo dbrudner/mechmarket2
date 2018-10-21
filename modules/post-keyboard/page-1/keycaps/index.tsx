@@ -21,7 +21,10 @@ class Keycaps extends React.Component<KeycapsProps, KeycapsState> {
 	render() {
 		return (
 			<Form.Item>
-				<AutoComplete dataSource={["blah"]} />
+				<AutoComplete
+					onChange={this.props.handleChange}
+					dataSource={["blah"]}
+				/>
 			</Form.Item>
 		);
 	}

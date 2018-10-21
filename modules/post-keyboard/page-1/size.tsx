@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Radio, Form } from "antd";
-import { SizeType } from "./index";
+import { SizeType } from "..";
 
 type SizeTypeProps = {
 	handleChange: (value) => void;

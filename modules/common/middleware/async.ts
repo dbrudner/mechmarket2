@@ -3,7 +3,7 @@ import {
 	FETCH_KEYCAPS,
 	FETCH_KEYCAPS_SUCCESS,
 	FETCH_KEYCAPS_FAILURE
-} from "../../post-keyboard/keycaps/duck";
+} from "../../post-keyboard/page-1/keycaps/duck";
 import axios from "axios";
 
 const createAsyncMiddleware = (route, method, actionType, successAction) => {

@@ -1,5 +1,5 @@
 import { Radio, Form } from "antd";
-import { LayoutType } from "./index";
+import { LayoutType } from "..";
 
 const { Group, Button } = Radio;
 

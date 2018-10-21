@@ -1,5 +1,5 @@
-import PostKeyboard from "../../client/post-keyboard";
-import Container from "../../client/common/container";
+import PostKeyboard from "../../modules/post-keyboard";
+import Container from "../../modules/common/container";
 
 export default () => (
 	<Container>

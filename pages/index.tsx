@@ -1,6 +1,6 @@
 import Link from "next/link";
-import Container from "../client/common/container";
-import Signup from "../client/signup";
+import Container from "../modules/common/container";
+import Signup from "../modules/signup";
 
 const IndexPage = () => (
 	<Container>
