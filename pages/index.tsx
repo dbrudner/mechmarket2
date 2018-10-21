@@ -1,14 +1,15 @@
-import Signup from "../client/signup";
 import Link from "next/link";
+import Container from "../client/common/container";
+import Signup from "../client/signup";
 
 const IndexPage = () => (
-	<div style={{ maxWidth: "960px", margin: "auto" }}>
+	<Container>
 		<h1>Sign up</h1>
 		<Signup />
 		<Link>
 			<a href="/login">Login</a>
 		</Link>
-	</div>
+	</Container>
 );
 
 export default IndexPage;
