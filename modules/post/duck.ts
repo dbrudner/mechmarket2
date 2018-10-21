@@ -19,6 +19,8 @@ const initialState: PostKeyboardState = {
 		"loremloremloremloremloremloremloremloremloremloremloremloremloremloremlorem ",
 	name: "Name",
 	images: [
+		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2ibKfw9K6ntYDgzFx55xcEiOZSO7YBASCruP5R5ckNE2Sv5K",
+		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2ibKfw9K6ntYDgzFx55xcEiOZSO7YBASCruP5R5ckNE2Sv5K",
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2ibKfw9K6ntYDgzFx55xcEiOZSO7YBASCruP5R5ckNE2Sv5K"
 	]
 };
