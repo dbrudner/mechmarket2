@@ -26,10 +26,7 @@ export default class SingleKeyboard extends React.Component<
 				<h1>{name}</h1>
 				<Tag color="geekblue">{size}</Tag>
 				<Tag color="purple">{layout}</Tag>
-				<p>
-					<strong>Keycaps: </strong>
-					{keycaps}
-				</p>
+				<Tag color="orange">{keycaps}</Tag>
 				<div>
 					<Slider {...slickSettings}>
 						{images.map(image => (
@@ -39,7 +36,15 @@ export default class SingleKeyboard extends React.Component<
 						))}
 					</Slider>
 				</div>
-				<p>{description}</p>
+				<p
+					style={{
+						marginTop: "20px",
+						fontSize: "20px",
+						lineHeight: "30px"
+					}}
+				>
+					{description}
+				</p>
 			</React.Fragment>
 		);
 	}

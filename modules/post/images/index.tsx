@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Icon, Input, Button, Modal, Card } from "antd";
 import { connect } from "react-redux";
+import Router from "next/router";
 import { UPDATE_KEYBOARD } from "../duck";
 
 type State = {
@@ -33,6 +34,7 @@ class Images extends React.Component<Props, State> {
 	submitKeyboard = () => {
 		const { images } = this.state;
 		this.props.updateKeyboard({ images });
+		Router.push("/post/preview");
 	};
 
 	render() {
@@ -114,4 +116,7 @@ const mapDispatchToProps = dispatch => ({
 		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
 });
 
-export default connect()(Images);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Images);

@@ -42,7 +42,7 @@ class PostKeyboard extends React.Component<Props, State> {
 	handleSubmit = e => {
 		e.preventDefault();
 		this.props.updateKeyboard(this.state);
-		Router.push("/images");
+		Router.push("/post/images");
 	};
 
 	render() {
