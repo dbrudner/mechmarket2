@@ -4,7 +4,11 @@ import Images from "./images";
 export default props => (
 	<div>
 		<Images {...props} />
-		<Button onClick={props.submitKeyboard} type="primary">
+		<Button
+			disabled={!props.images.length}
+			onClick={props.submitKeyboard}
+			type="primary"
+		>
 			Submit Keyboard
 		</Button>
 	</div>

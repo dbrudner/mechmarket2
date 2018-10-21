@@ -32,19 +32,23 @@ class PostKeyboard extends React.Component {
 	handleChange = object => this.setState({ ...this.state, ...object });
 
 	render() {
-		console.log(this.props);
-		return this.state.page === 1 ? (
-			<Page1
-				goToPage={this.goToPage}
-				handleChange={this.handleChange}
-				{...this.state}
-			/>
-		) : (
-			<Page2
-				goToPage={this.goToPage}
-				handleChange={this.handleChange}
-				{...this.state}
-			/>
+		return (
+			<div>
+				<h1>Post a keyboard</h1>
+				{this.state.page === 1 ? (
+					<Page1
+						goToPage={this.goToPage}
+						handleChange={this.handleChange}
+						{...this.state}
+					/>
+				) : (
+					<Page2
+						goToPage={this.goToPage}
+						handleChange={this.handleChange}
+						{...this.state}
+					/>
+				)}
+			</div>
 		);
 	}
 }

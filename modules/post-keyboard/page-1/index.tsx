@@ -14,11 +14,10 @@ type Props = PostKeyboardState & {
 
 export default ({ goToPage, handleChange, ...state }) => (
 	<Form onSubmit={() => goToPage(2)}>
-		<h1>Post a keyboard</h1>
 		<FormItem>
 			<h2>Name</h2>
 			<Input
-				onChange={e => this.handleChange({ name: e.target.value })}
+				onChange={e => handleChange({ name: e.target.value })}
 				value={state.name}
 				name="name"
 			/>
@@ -26,12 +25,12 @@ export default ({ goToPage, handleChange, ...state }) => (
 		<h2>Size</h2>
 		<Size
 			selectedSize={state.size}
-			handleChange={size => this.handleChange({ size })}
+			handleChange={size => handleChange({ size })}
 		/>
 		<h2>Layout</h2>
 		<Layout
 			selectedLayout={state.layout}
-			handleChange={layout => this.handleChange({ layout })}
+			handleChange={layout => handleChange({ layout })}
 		/>
 		<div
 			style={{
@@ -41,14 +40,12 @@ export default ({ goToPage, handleChange, ...state }) => (
 			}}
 		>
 			<h2>Keycaps</h2>
-			<Keycaps handleChange={keycaps => this.handleChange({ keycaps })} />
+			<Keycaps handleChange={keycaps => handleChange({ keycaps })} />
 		</div>
 		<FormItem>
 			<h2>Description</h2>
 			<Input.TextArea
-				onChange={e =>
-					this.handleChange({ description: e.target.value })
-				}
+				onChange={e => handleChange({ description: e.target.value })}
 				value={state.description}
 				name="description"
 				autosize={{ minRows: 3, maxRows: 6 }}
