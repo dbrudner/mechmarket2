@@ -1,36 +1,42 @@
 import * as React from "react";
 import { Icon, Input, Button, Modal, Card } from "antd";
-import { PostKeyboardState } from "../index";
+import { connect } from "react-redux";
+import { UPDATE_KEYBOARD } from "../duck";
 
 type State = {
 	url: string;
 	previewKeyboard: string;
-};
-
-type Props = PostKeyboardState & {
 	images: string[];
-	handleChange: (object: any) => void;
 };
 
-export default class Images extends React.Component<Props, State> {
+type Props = {
+	updateKeyboard: (payload: { images: string[] }) => void;
+};
+
+class Images extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 		this.state = {
 			url: "",
-			previewKeyboard: ""
+			previewKeyboard: "",
+			images: []
 		};
 	}
 
 	handleImageSubmit = e => {
 		e.preventDefault();
-		this.props.handleChange({
-			images: [...this.props.images, this.state.url]
+		this.setState({
+			images: [...this.state.images, this.state.url]
 		});
 	};
 
+	submitKeyboard = () => {
+		const { images } = this.state;
+		this.props.updateKeyboard({ images });
+	};
+
 	render() {
-		const { images } = this.props;
-		console.log(this.props);
+		const { images } = this.state;
 		return (
 			<React.Fragment>
 				<h2>Add images</h2>
@@ -65,6 +71,13 @@ export default class Images extends React.Component<Props, State> {
 						</li>
 					))}
 				</ul>
+				<Button
+					onClick={this.submitKeyboard}
+					type="primary"
+					disabled={!this.state.images.length}
+				>
+					Submit
+				</Button>
 				<Modal
 					visible={!!this.state.previewKeyboard}
 					footer={null}
@@ -73,17 +86,9 @@ export default class Images extends React.Component<Props, State> {
 				>
 					<Card
 						style={{ width: "60%", marginLeft: "20%" }}
-						cover={
-							<img
-								alt={this.props.name}
-								src={this.state.previewKeyboard}
-							/>
-						}
+						cover={<img src={this.state.previewKeyboard} />}
 					>
-						<Card.Meta
-							title={this.props.name}
-							description={this.state.previewKeyboard}
-						/>
+						<Card.Meta description={this.state.previewKeyboard} />
 					</Card>
 					<div style={{ textAlign: "right" }}>
 						<Button
@@ -101,3 +106,12 @@ export default class Images extends React.Component<Props, State> {
 		);
 	}
 }
+
+const mapStateToProps = ({ name, images }) => ({ name, images });
+
+const mapDispatchToProps = dispatch => ({
+	updateKeyboard: keyboard =>
+		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
+});
+
+export default connect()(Images);

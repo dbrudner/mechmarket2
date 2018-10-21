@@ -1,6 +1,6 @@
 import App, { Container } from "next/app";
 import React from "react";
-import withReduxStore from "../lib/with-redux-store";
+import withReduxStore from "../modules/redux/with-redux-store";
 import { Provider } from "react-redux";
 import stylesheet from "antd/dist/antd.min.css";
 import "../style/style.css";
