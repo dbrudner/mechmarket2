@@ -23,6 +23,7 @@ type State = {
 
 type Props = {
 	updateKeyboard: (keyboard: State) => void;
+	postKeyboardForm: State;
 };
 
 class PostKeyboard extends React.Component<Props, State> {
@@ -37,6 +38,10 @@ class PostKeyboard extends React.Component<Props, State> {
 			name: "",
 			images: []
 		};
+	}
+
+	componentDidMount() {
+		this.setState({ ...this.props.postKeyboardForm });
 	}
 
 	handleSubmit = e => {
@@ -90,7 +95,7 @@ class PostKeyboard extends React.Component<Props, State> {
 					/>
 				</FormItem>
 				<Button htmlType="submit" type="primary">
-					Submit
+					Next page
 				</Button>
 			</Form>
 		);
@@ -102,7 +107,9 @@ const mapDispatchToProps = dispatch => ({
 		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
 });
 
+const mapStateToProps = ({ postKeyboardForm }) => ({ postKeyboardForm });
+
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps
 )(PostKeyboard);

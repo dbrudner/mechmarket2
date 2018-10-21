@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Tag } from "antd";
+import { Tag, Button, Icon } from "antd";
 import { PostKeyboardState } from "../post/duck";
 import Slider from "react-slick";
 
@@ -18,7 +18,8 @@ export default class SingleKeyboard extends React.Component<
 			centerMode: true,
 			slidesToShow: 1,
 			slidesToScroll: 1,
-			centerPadding: 0
+			centerPadding: 0,
+			speed: 500
 		};
 
 		return (
@@ -30,7 +31,10 @@ export default class SingleKeyboard extends React.Component<
 				<div>
 					<Slider {...slickSettings}>
 						{images.map(image => (
-							<div key={`image-${image}`}>
+							<div
+								style={{ marginLeft: "20px" }}
+								key={`image-${image}`}
+							>
 								<img src={image} />
 							</div>
 						))}
@@ -45,6 +49,9 @@ export default class SingleKeyboard extends React.Component<
 				>
 					{description}
 				</p>
+				<Button type="primary" href="/post/keyboard">
+					Edit <Icon type="edit" />
+				</Button>
 			</React.Fragment>
 		);
 	}

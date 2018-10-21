@@ -12,6 +12,7 @@ type State = {
 
 type Props = {
 	updateKeyboard: (payload: { images: string[] }) => void;
+	images: string[];
 };
 
 class Images extends React.Component<Props, State> {
@@ -22,6 +23,11 @@ class Images extends React.Component<Props, State> {
 			previewKeyboard: "",
 			images: []
 		};
+	}
+
+	componentDidMount() {
+		const { images } = this.props;
+		this.setState({ images });
 	}
 
 	handleImageSubmit = e => {
@@ -78,7 +84,7 @@ class Images extends React.Component<Props, State> {
 					type="primary"
 					disabled={!this.state.images.length}
 				>
-					Submit
+					Preview
 				</Button>
 				<Modal
 					visible={!!this.state.previewKeyboard}
@@ -109,7 +115,10 @@ class Images extends React.Component<Props, State> {
 	}
 }
 
-const mapStateToProps = ({ name, images }) => ({ name, images });
+const mapStateToProps = ({ postKeyboardForm: { name, images } }) => ({
+	name,
+	images
+});
 
 const mapDispatchToProps = dispatch => ({
 	updateKeyboard: keyboard =>
