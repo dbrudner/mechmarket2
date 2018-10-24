@@ -16,7 +16,7 @@ const keyboardSchema = new Schema({
 	condition: String,
 	imgs: Array,
 	plate: String,
-	price: Number,
+	askingPrice: Number,
 	keycaps: String,
 	upvotes: {
 		type: Number,

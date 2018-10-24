@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Radio, Form } from "antd";
-import { SizeType } from "..";
+import { Radio } from "antd";
+import { SizeType } from "./index";
 
 type SizeTypeProps = {
 	handleChange: (value) => void;
@@ -8,7 +8,7 @@ type SizeTypeProps = {
 };
 
 const Size: React.SFC<SizeTypeProps> = ({ handleChange, selectedSize }) => (
-	<Form.Item>
+	<React.Fragment>
 		<Radio.Group
 			onChange={e => handleChange(e.target.value)}
 			value={selectedSize}
@@ -19,7 +19,7 @@ const Size: React.SFC<SizeTypeProps> = ({ handleChange, selectedSize }) => (
 			<Radio value="75%">75%</Radio>
 			<Radio value="60%">60%</Radio>
 		</Radio.Group>
-	</Form.Item>
+	</React.Fragment>
 );
 
 export default Size;

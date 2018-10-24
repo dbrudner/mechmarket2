@@ -2,14 +2,14 @@ import * as React from "react";
 import { Tag, Button, Icon } from "antd";
 import { PostKeyboardState } from "../post/duck";
 import Slider from "react-slick";
+import { connect } from "react-redux";
 
-export default class SingleKeyboard extends React.Component<
-	PostKeyboardState,
-	{}
-> {
+class SingleKeyboard extends React.Component<PostKeyboardState, {}> {
 	constructor(props) {
 		super(props);
 	}
+
+	submitKeyboard = () => {};
 
 	render() {
 		const { size, layout, keycaps, description, name, images } = this.props;
@@ -49,10 +49,23 @@ export default class SingleKeyboard extends React.Component<
 				>
 					{description}
 				</p>
-				<Button type="primary" href="/post/keyboard">
+				<Button href="/post/keyboard">
 					Edit <Icon type="edit" />
+				</Button>
+				<Button
+					style={{ marginLeft: "20px" }}
+					type="primary"
+					onClick={this.submitKeyboard}
+				>
+					Submit
 				</Button>
 			</React.Fragment>
 		);
 	}
 }
+
+const mapDispatchToProps = dispatch => ({
+	submitKeyboard: () => ({ type: SUBMIT_KEYBOARD })
+});
+
+export default connect()(SingleKeyboard);
