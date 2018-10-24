@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Icon, Input, Button, Modal, Card, List } from "antd";
+import { Icon, Input, Button, Modal, Card, List, Alert } from "antd";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { UPDATE_KEYBOARD } from "../duck";
@@ -36,10 +36,22 @@ class Images extends React.Component<Props, State> {
 	handleImageSubmit = e => {
 		e.preventDefault();
 		const { images, url } = this.state;
+		const validUrl = new RegExp(
+			/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+		);
+
+		if (!url) return;
 
 		if (images.includes(url)) {
 			return this.setState({
 				error: "This image has already been added."
+			});
+		}
+
+		if (!validUrl.test(url)) {
+			return this.setState({
+				error:
+					"The URL you've entered is not valid. A valid URL must be preceeded  by http, https, or www."
 			});
 		}
 
@@ -52,6 +64,13 @@ class Images extends React.Component<Props, State> {
 
 	submitKeyboard = () => {
 		const { images } = this.state;
+
+		if (!images.length) {
+			return this.setState({
+				error: "Must add at least one image to continue."
+			});
+		}
+
 		this.props.updateKeyboard({ images });
 		Router.push("/post/preview");
 	};
@@ -66,7 +85,24 @@ class Images extends React.Component<Props, State> {
 		const { images } = this.state;
 		return (
 			<React.Fragment>
-				<h2>Add images</h2>
+				<h2>Images</h2>
+				<Alert
+					type="warning"
+					style={{ margin: "15px 0" }}
+					message={
+						<React.Fragment>
+							Adding at least one{" "}
+							<a href="time-stamp">time-stamped</a> image is
+							required. Your post will not be published until a
+							moderator has verified your listing contains at
+							least one time-stamped image.{" "}
+							<a href="time-stamp">
+								<Icon type="question-circle" />
+							</a>
+						</React.Fragment>
+					}
+				/>
+				<h3>Image URL</h3>
 				<form onSubmit={this.handleImageSubmit}>
 					<Input
 						onChange={e => this.setState({ url: e.target.value })}
@@ -81,6 +117,7 @@ class Images extends React.Component<Props, State> {
 				</form>
 				{this.state.error && <Warning message={this.state.error} />}
 				<List
+					locale={{ emptyText: "Add an image" }}
 					dataSource={images}
 					renderItem={image => (
 						<List.Item
@@ -112,11 +149,7 @@ class Images extends React.Component<Props, State> {
 						</li>
 					))}
 				</ul> */}
-				<Button
-					onClick={this.submitKeyboard}
-					type="primary"
-					disabled={!this.state.images.length}
-				>
+				<Button onClick={this.submitKeyboard} type="primary">
 					Next
 				</Button>
 				<Modal
