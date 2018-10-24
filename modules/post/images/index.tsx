@@ -1,13 +1,15 @@
 import * as React from "react";
-import { Icon, Input, Button, Modal, Card } from "antd";
+import { Icon, Input, Button, Modal, Card, List } from "antd";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { UPDATE_KEYBOARD } from "../duck";
+import Warning from "../../common/warning";
 
 type State = {
 	url: string;
 	previewKeyboard: string;
 	images: string[];
+	error: string;
 };
 
 type Props = {
@@ -21,7 +23,8 @@ class Images extends React.Component<Props, State> {
 		this.state = {
 			url: "",
 			previewKeyboard: "",
-			images: []
+			images: [],
+			error: ""
 		};
 	}
 
@@ -32,8 +35,18 @@ class Images extends React.Component<Props, State> {
 
 	handleImageSubmit = e => {
 		e.preventDefault();
+		const { images, url } = this.state;
+
+		if (images.includes(url)) {
+			return this.setState({
+				error: "This image has already been added."
+			});
+		}
+
 		this.setState({
-			images: [...this.state.images, this.state.url]
+			images: [...images, url],
+			url: "",
+			error: ""
 		});
 	};
 
@@ -41,6 +54,12 @@ class Images extends React.Component<Props, State> {
 		const { images } = this.state;
 		this.props.updateKeyboard({ images });
 		Router.push("/post/preview");
+	};
+
+	removeImage = (omitImage: string) => {
+		this.setState({
+			images: this.state.images.filter(image => image !== omitImage)
+		});
 	};
 
 	render() {
@@ -60,31 +79,45 @@ class Images extends React.Component<Props, State> {
 						}
 					/>
 				</form>
-				<ul style={{ margin: "20px" }}>
-					{images.map(image => (
-						<li>
-							{image}
-							<Button.Group style={{ marginLeft: "20px" }}>
+				{this.state.error && <Warning message={this.state.error} />}
+				<List
+					dataSource={images}
+					renderItem={image => (
+						<List.Item
+							actions={[
+								<a href={image} target="blank">
+									View
+								</a>,
 								<Button
-									onClick={() =>
-										this.setState({
-											previewKeyboard: image
-										})
-									}
-								>
-									Preview
-								</Button>
-								<Button type="danger">Remove</Button>
-							</Button.Group>
+									style={{ marginLeft: "5px" }}
+									type="danger"
+									icon="close"
+									onClick={() => this.removeImage(image)}
+								/>
+							]}
+						>
+							{image}
+						</List.Item>
+					)}
+				/>
+				{/* <ul style={{ margin: "20px" }}>
+					{images.map(image => (
+						<li style={{ marginTop: "10px" }}>
+							<a href={image}>{image}</a>
+							<Button
+								style={{ marginLeft: "5px" }}
+								type="danger"
+								icon="close"
+							/>
 						</li>
 					))}
-				</ul>
+				</ul> */}
 				<Button
 					onClick={this.submitKeyboard}
 					type="primary"
 					disabled={!this.state.images.length}
 				>
-					Preview
+					Next
 				</Button>
 				<Modal
 					visible={!!this.state.previewKeyboard}

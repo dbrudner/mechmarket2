@@ -1,6 +1,6 @@
 import * as React from "react";
 import Router from "next/router";
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Icon } from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import { connect } from "react-redux";
 import { withFormik } from "formik";
@@ -39,7 +39,7 @@ class PostKeyboard extends React.Component<Props, State> {
 			keycaps: "",
 			description: "",
 			name: "",
-			askingPrice: 0,
+			askingPrice: 1,
 			images: []
 		};
 	}
@@ -55,9 +55,20 @@ class PostKeyboard extends React.Component<Props, State> {
 	};
 
 	askingPriceChange = ({ target: { value } }) => {
-		if (!isNaN(value)) {
-			const askingPrice = parseFloat(value).toFixed(2);
-			this.setState({ askingPrice });
+		const validCurrency = new RegExp(
+			/^[+-]?[0-9]{1,3}(?:,?[0-9]{3})*(?:\.[0-9]{2})?$/
+		);
+
+		if (value === "") {
+			this.setState({ askingPrice: value });
+		}
+
+		if (parseFloat(value) <= 0 || parseFloat(value) > 99999) {
+			return;
+		}
+
+		if (validCurrency.test(value)) {
+			this.setState({ askingPrice: value });
 		}
 	};
 
@@ -70,7 +81,7 @@ class PostKeyboard extends React.Component<Props, State> {
 						onChange={e => this.setState({ name: e.target.value })}
 						value={this.state.name}
 						name="name"
-						type="number"
+						size="large"
 					/>
 				</FormItem>
 				<h2>Asking price</h2>
@@ -79,16 +90,35 @@ class PostKeyboard extends React.Component<Props, State> {
 						name="asking price"
 						value={this.state.askingPrice}
 						onChange={this.askingPriceChange}
+						prefix="$"
+						style={{ width: "200px" }}
+						size="large"
 					/>
 				</FormItem>
-				<h2>Size</h2>
+				<h2>
+					Size{" "}
+					<a
+						href="https://www.reddit.com/r/MechanicalKeyboards/wiki/tenkeyless_keyboards"
+						target="blank"
+					>
+						<Icon type="question-circle" theme="outlined" />
+					</a>
+				</h2>
 				<FormItem>
 					<Size
 						selectedSize={this.state.size as SizeType}
 						handleChange={size => this.setState({ size })}
 					/>
 				</FormItem>
-				<h2>Layout</h2>
+				<h2>
+					Layout{" "}
+					<a
+						href="https://deskthority.net/wiki/ANSI_vs_ISO"
+						target="blank"
+					>
+						<Icon type="info-circle" theme="outlined" />
+					</a>
+				</h2>
 				<Layout
 					selectedLayout={this.state.layout}
 					handleChange={layout => this.setState({ layout })}
@@ -103,6 +133,7 @@ class PostKeyboard extends React.Component<Props, State> {
 					<h2>Keycaps</h2>
 					<Keycaps
 						handleChange={keycaps => this.setState({ keycaps })}
+						size="large"
 					/>
 				</div>
 				<h2>Description</h2>
@@ -117,7 +148,7 @@ class PostKeyboard extends React.Component<Props, State> {
 					/>
 				</FormItem>
 				<Button htmlType="submit" type="primary">
-					Next page
+					Next
 				</Button>
 			</Form>
 		);
