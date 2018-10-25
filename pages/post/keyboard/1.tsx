@@ -33,7 +33,10 @@ type Props = {
 const FormItem = Form.Item;
 
 const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
-	const hasError = errors => !!Object.keys(errors).length;
+	const hasError = errors => {
+		console.log(!!Object.keys(errors).length);
+		return !!Object.keys(errors).length;
+	};
 	const getError = errors => errors[Object.keys(errors)[0]];
 
 	return (
@@ -82,7 +85,6 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 								<Input
 									name="price"
 									onChange={e => {
-										console.log(errors);
 										if (
 											!new RegExp(/^[0-9]{0,4}$/).test(
 												e.target.value
