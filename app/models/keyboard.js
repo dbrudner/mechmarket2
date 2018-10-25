@@ -18,6 +18,7 @@ const keyboardSchema = new Schema({
 	plate: String,
 	askingPrice: Number,
 	keycaps: String,
+	timeStampVerified: { type: Boolean, default: false, required: true },
 	upvotes: {
 		type: Number,
 		default: 0,

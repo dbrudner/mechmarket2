@@ -37,7 +37,7 @@ class Images extends React.Component<Props, State> {
 		e.preventDefault();
 		const { images, url } = this.state;
 		const validUrl = new RegExp(
-			/^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/
+			/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/
 		);
 
 		if (!url) return;
@@ -51,7 +51,7 @@ class Images extends React.Component<Props, State> {
 		if (!validUrl.test(url)) {
 			return this.setState({
 				error:
-					"The URL you've entered is not valid. A valid URL must be preceeded  by http, https, or www."
+					"The URL you've entered is not valid. A valid URL must be begin with http, https and end in .jpg, .gif, or .png"
 			});
 		}
 
@@ -85,17 +85,19 @@ class Images extends React.Component<Props, State> {
 		const { images } = this.state;
 		return (
 			<React.Fragment>
-				<h2>Images</h2>
+				<h2>Add images of your keyboard</h2>
 				<Alert
 					type="warning"
+					closable
 					style={{ margin: "15px 0" }}
-					message={
+					message="Time-stamped image required"
+					description={
 						<React.Fragment>
-							Adding at least one{" "}
-							<a href="time-stamp">time-stamped</a> image is
-							required. Your post will not be published until a
-							moderator has verified your listing contains at
-							least one time-stamped image.{" "}
+							You can add as many images as you'd like, but at
+							least one <a href="time-stamp">time-stamped</a>{" "}
+							image is required. Your post will not be published
+							until a moderator has verified your listing contains
+							at least one time-stamped image.{" "}
 							<a href="time-stamp">
 								<Icon type="question-circle" />
 							</a>
@@ -117,7 +119,7 @@ class Images extends React.Component<Props, State> {
 				</form>
 				{this.state.error && <Warning message={this.state.error} />}
 				<List
-					locale={{ emptyText: "Add an image" }}
+					locale={{ emptyText: "Add an image of your keyboard" }}
 					dataSource={images}
 					renderItem={image => (
 						<List.Item
@@ -125,30 +127,15 @@ class Images extends React.Component<Props, State> {
 								<a href={image} target="blank">
 									View
 								</a>,
-								<Button
-									style={{ marginLeft: "5px" }}
-									type="danger"
-									icon="close"
-									onClick={() => this.removeImage(image)}
-								/>
+								<a onClick={() => this.removeImage(image)}>
+									Remove
+								</a>
 							]}
 						>
 							{image}
 						</List.Item>
 					)}
 				/>
-				{/* <ul style={{ margin: "20px" }}>
-					{images.map(image => (
-						<li style={{ marginTop: "10px" }}>
-							<a href={image}>{image}</a>
-							<Button
-								style={{ marginLeft: "5px" }}
-								type="danger"
-								icon="close"
-							/>
-						</li>
-					))}
-				</ul> */}
 				<Button onClick={this.submitKeyboard} type="primary">
 					Next
 				</Button>
