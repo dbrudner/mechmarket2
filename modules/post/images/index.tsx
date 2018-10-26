@@ -72,7 +72,7 @@ class Images extends React.Component<Props, State> {
 		}
 
 		this.props.updateKeyboard({ images });
-		Router.push("/post/preview");
+		Router.push("/post/keyboard/preview");
 	};
 
 	removeImage = (omitImage: string) => {

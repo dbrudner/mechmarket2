@@ -33,10 +33,7 @@ type Props = {
 const FormItem = Form.Item;
 
 const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
-	const hasError = errors => {
-		console.log(!!Object.keys(errors).length);
-		return !!Object.keys(errors).length;
-	};
+	const hasError = errors => !!Object.keys(errors).length;
 	const getError = errors => errors[Object.keys(errors)[0]];
 
 	return (
@@ -50,6 +47,7 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 					}}
 					onSubmit={(values, action) => {
 						updateKeyboard(values);
+						Router.push("/post/keyboard/2");
 					}}
 					validationSchema={Yup.object().shape({
 						name: Yup.string()

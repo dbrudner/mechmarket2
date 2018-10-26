@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AutoComplete, Form } from "antd";
+import { AutoComplete } from "antd";
 import { connect } from "react-redux";
 import * as actions from "./duck";
 
@@ -20,12 +20,10 @@ class Keycaps extends React.Component<KeycapsProps, KeycapsState> {
 
 	render() {
 		return (
-			<Form.Item>
-				<AutoComplete
-					onChange={this.props.handleChange}
-					dataSource={["blah"]}
-				/>
-			</Form.Item>
+			<AutoComplete
+				onChange={this.props.handleChange}
+				dataSource={["blah"]}
+			/>
 		);
 	}
 }

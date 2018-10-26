@@ -4,6 +4,11 @@ import {
 	FETCH_KEYCAPS_SUCCESS,
 	FETCH_KEYCAPS_FAILURE
 } from "../../post/keyboard/keycaps/duck";
+import {
+	SUBMIT_KEYBOARD,
+	SUBMIT_KEYBOARD_SUCCESS,
+	SUBMIT_KEYBOARD_FAILURE
+} from "../../post/duck";
 import axios from "axios";
 
 const createAsyncMiddleware = (route, method, actionType, successAction) => {
@@ -31,4 +36,11 @@ export const fetchKeycaps = createAsyncMiddleware(
 	"get",
 	FETCH_KEYCAPS,
 	FETCH_KEYCAPS_SUCCESS
+);
+
+export const postKeyboard = createAsyncMiddleware(
+	"/api/post/keyboard",
+	"POST",
+	SUBMIT_KEYBOARD,
+	SUBMIT_KEYBOARD_SUCCESS
 );

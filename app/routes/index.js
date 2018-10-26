@@ -7,7 +7,7 @@ module.exports = function(app, passport) {
 
 	keyboard.getAllKeyboards(app, "/api/keyboards/all");
 
-	keyboard.postKeyboard(app, "/api/new/keyboard");
+	keyboard.postKeyboard(app, "/api/post/keyboard");
 
 	keyboard.getOneKeyboard(app, "/api/keyboard/:id");
 
