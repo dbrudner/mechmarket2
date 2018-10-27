@@ -1,15 +1,47 @@
-import Link from "next/link";
-import Container from "../modules/common/container";
-import Signup from "../modules/signup";
+import { Layout, Menu, Breadcrumb, Icon } from "antd";
+import axios from "axios";
 
-const IndexPage = () => (
-	<Container>
-		<h1>Sign up</h1>
-		<Signup />
-		<Link>
-			<a href="/login">Login</a>
-		</Link>
-	</Container>
-);
+type Keyboard = {
+	switches?: string;
+	size?: string;
+	layout?: string;
+	custom?: boolean;
+	description?: string;
+	sold?: boolean;
+	condition?: string;
+	imgs?: string[];
+	plate?: string;
+	askingPrice?: Number;
+	keycaps?: string;
+	timeStampVerified: { type: boolean; default: false; required: true };
+	upvotes: {
+		type: Number;
+		default: 0;
+		required: true;
+	};
+	created_at: Date;
+};
 
-export default IndexPage;
+type Props = {
+	newest: Keyboard[];
+};
+
+const { Header, Content, Footer, Sider } = Layout;
+const Dashboard: React.SFC<Props> = props => {
+	console.log(props);
+	return (
+		<Layout>
+			<Header />
+			<Content>
+				<h1>MechMarket</h1>
+				<h2>Buy and sell mechanical keyboards</h2>
+			</Content>
+		</Layout>
+	);
+};
+
+// Dashboard.getInitialProps = async () => (
+
+// );
+
+export default Dashboard;
