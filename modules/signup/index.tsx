@@ -93,7 +93,7 @@ const SignupForm: React.SFC<{
 				<Input
 					onChange={handleChange}
 					value={values.password2}
-					type="password2"
+					type="password"
 					name="password2"
 					prefix={
 						<Icon

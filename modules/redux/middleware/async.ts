@@ -1,4 +1,5 @@
 import { SIGN_UP_FAILURE, SIGN_UP_SUCCESS, SIGN_UP } from "../../signup/duck";
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGIN } from "../../login/duck";
 import {
 	FETCH_KEYCAPS,
 	FETCH_KEYCAPS_SUCCESS,
@@ -9,6 +10,7 @@ import {
 	SUBMIT_KEYBOARD_SUCCESS,
 	SUBMIT_KEYBOARD_FAILURE
 } from "../../post/duck";
+
 import axios from "axios";
 
 const createAsyncMiddleware = (route, method, actionType, successAction) => {
@@ -29,6 +31,13 @@ export const signUp = createAsyncMiddleware(
 	"POST",
 	SIGN_UP,
 	SIGN_UP_SUCCESS
+);
+
+export const login = createAsyncMiddleware(
+	"/api/login",
+	"POST",
+	LOGIN,
+	LOGIN_SUCCESS
 );
 
 export const fetchKeycaps = createAsyncMiddleware(

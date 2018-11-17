@@ -8,16 +8,16 @@ import * as actions from "./duck";
 
 const FormItem = Form.Item;
 
-type SignupType = {
+type LoginType = {
 	username?: string;
 	password?: string;
 	remember?: boolean;
-	signup?: (payload: { username?: string; password?: string }) => void;
+	login?: (payload: { username?: string; password?: string }) => void;
 };
 
-const SignupForm: React.SFC<{
-	values: SignupType;
-	errors: SignupType;
+const LoginForm: React.SFC<{
+	values: LoginType;
+	errors: LoginType;
 	handleSubmit: any;
 	handleChange: any;
 	touched: any;
@@ -34,8 +34,9 @@ const SignupForm: React.SFC<{
 					<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
 				}
 			/>
-			{errors.username &&
-				touched.username && <Warning message={errors.username} />}
+			{errors.username && touched.username && (
+				<Warning message={errors.username} />
+			)}
 		</FormItem>
 		<FormItem>
 			<Input
@@ -48,8 +49,9 @@ const SignupForm: React.SFC<{
 					<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
 				}
 			/>
-			{errors.password &&
-				touched.password && <Warning message={errors.password} />}
+			{errors.password && touched.password && (
+				<Warning message={errors.password} />
+			)}
 		</FormItem>
 		<FormItem>
 			<label style={{ cursor: "pointer" }}>
@@ -61,15 +63,15 @@ const SignupForm: React.SFC<{
 				type="primary"
 				htmlType="submit"
 			>
-				Sign up
+				Login
 			</Button>
 		</FormItem>
 	</Form>
 );
 
-const SignupFormik = withFormik<SignupType, SignupType>({
-	handleSubmit(values: SignupType, { props }) {
-		props.signup(values);
+const LoginFormik = withFormik<LoginType, LoginType>({
+	async handleSubmit(values: LoginType, { props }) {
+		await props.login(values);
 	},
 	validationSchema: yup.object().shape({
 		username: yup
@@ -82,18 +84,18 @@ const SignupFormik = withFormik<SignupType, SignupType>({
 			.required("Password is required.")
 	}),
 	displayName: "Sign up"
-})(SignupForm as any);
+})(LoginForm as any);
 
 const mapDispatchToProps = dispatch => {
 	return {
-		signup: payload => dispatch({ type: actions.SIGN_UP, payload }),
+		login: payload => dispatch({ type: actions.LOGIN, payload }),
 		dispatch
 	};
 };
 
-const Signup = connect(
+const Login = connect(
 	null,
 	mapDispatchToProps
-)(SignupFormik);
+)(LoginFormik);
 
-export default Signup;
+export default Login;
