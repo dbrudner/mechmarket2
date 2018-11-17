@@ -17,7 +17,6 @@ const Preview = props => (
 			style={{ marginLeft: "20px" }}
 			type="primary"
 			onClick={() => {
-				console.log("hey");
 				props.submitKeyboard();
 			}}
 		>

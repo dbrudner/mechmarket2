@@ -1,12 +1,18 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { loginReducer } from "../signup/duck";
+import { userReducer } from "../user/duck";
 import { keycapReducer } from "../post/keyboard/keycaps/duck";
 import { postKeyboardReducer } from "../post/duck";
-import { fetchKeycaps, signUp, login, postKeyboard } from "./middleware/async";
+import {
+	fetchKeycaps,
+	signUp,
+	login,
+	postKeyboard,
+	getUser
+} from "./middleware/async";
 
 const rootReducer = combineReducers({
-	user: loginReducer,
+	user: userReducer,
 	keycaps: keycapReducer,
 	postKeyboardForm: postKeyboardReducer
 });
@@ -15,7 +21,7 @@ export function initializeStore() {
 	return createStore(
 		rootReducer,
 		composeWithDevTools(
-			applyMiddleware(fetchKeycaps, signUp, postKeyboard, login)
+			applyMiddleware(fetchKeycaps, signUp, postKeyboard, login, getUser)
 		)
 	);
 }

@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import Warning from "./warning";
 import { connect } from "react-redux";
-import * as actions from "./duck";
+import * as actions from "../user/duck";
 
 const FormItem = Form.Item;
 

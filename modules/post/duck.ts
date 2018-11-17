@@ -5,7 +5,7 @@ export const SUBMIT_KEYBOARD_FAILURE = "SUBMIT_KEYBOARD_FAILURE";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
-export type PostKeyboardState = {
+export type Keyboard = {
 	size: string;
 	layout: LayoutType;
 	keycaps: string;
@@ -15,7 +15,7 @@ export type PostKeyboardState = {
 	price: number;
 };
 
-const initialState: PostKeyboardState = {
+const initialState: Keyboard = {
 	size: "Full",
 	layout: "ISO",
 	keycaps: "lorem",
@@ -30,10 +30,7 @@ const initialState: PostKeyboardState = {
 	]
 };
 
-export const postKeyboardReducer = (
-	state: PostKeyboardState = initialState,
-	action
-) => {
+export const postKeyboardReducer = (state: Keyboard = initialState, action) => {
 	if (action.type === UPDATE_KEYBOARD) {
 		return { ...state, ...action.payload };
 	}

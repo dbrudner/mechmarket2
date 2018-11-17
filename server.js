@@ -24,7 +24,6 @@ if (process.env.MONGODB_URI) {
 			console.log("connected");
 		}
 	);
-	console.log("Hey?");
 }
 
 app.prepare().then(() => {

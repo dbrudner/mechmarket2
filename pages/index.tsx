@@ -28,7 +28,6 @@ type Props = {
 
 const { Header, Content, Footer, Sider } = Layout;
 const Dashboard: React.SFC<Props> = props => {
-	console.log(props);
 	return (
 		<Layout>
 			<Header />

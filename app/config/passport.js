@@ -42,8 +42,12 @@ module.exports = function(passport) {
 											});
 										} else {
 											const newUser = new User();
-											newUser.username =
-												req.body.username;
+											const {
+												username,
+												email
+											} = req.body;
+											newUser.username = username;
+											newUser.email = email;
 											newUser.password = newUser.generateHash(
 												password
 											);
@@ -73,14 +77,11 @@ module.exports = function(passport) {
 			(username, password, done) => {
 				User.findOne({ username }, function(err, user) {
 					if (err) return done(err);
-					console.log(user);
 					if (!user) {
-						console.log("No username");
 						return done(null, false, "Username doesn't exist");
 					}
 
 					if (!user.validPassword(password)) {
-						console.log("Wrong password");
 						return done(null, false, "Wrong Password");
 					}
 					return done(null, user);
