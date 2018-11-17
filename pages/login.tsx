@@ -1,12 +1,12 @@
 import Link from "next/link";
+import Router from "next/router";
+import { connect } from "react-redux";
 import { Container } from "../modules/common";
 import Login from "../modules/login";
-import { connect } from "react-redux";
 import * as types from "../modules/user/duck";
-import Router from "next/router";
 
 const IndexPage = ({ user }) => {
-	if (user === types.LOGIN_SUCCESS) {
+	if (user === types.SIGN_UP_SUCCESS) {
 		Router.push("/");
 		return null;
 	}

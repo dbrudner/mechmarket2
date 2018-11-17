@@ -20,7 +20,8 @@ export type User =
 			email: string;
 			keyboards: Keyboard[];
 	  }
-	| "LOGIN_SUCCESS";
+	| "LOGIN_SUCCESS"
+	| "SIGN_UP_SUCCESS";
 
 const initialState: User = null;
 
@@ -31,6 +32,10 @@ export const userReducer = (state = initialState, action) => {
 
 	if (action.type === LOGIN_SUCCESS) {
 		return LOGIN_SUCCESS;
+	}
+
+	if (action.type === SIGN_UP_SUCCESS) {
+		return SIGN_UP_SUCCESS;
 	}
 
 	return state;

@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { User, getUser, LOGIN_SUCCESS } from "../user";
+import { User, getUser, LOGIN_SUCCESS, SIGN_UP_SUCCESS } from "../user";
 import { useEffect } from "react";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 const containerStyle = { maxWidth: "960px", margin: "auto", padding: "15px" };
 
 const InnerContainer: React.SFC<Props> = ({ user, children, getUser }) => {
-	if (!user || user === LOGIN_SUCCESS) {
+	if (!user || user === LOGIN_SUCCESS || user === SIGN_UP_SUCCESS) {
 		useEffect(
 			() => {
 				getUser();
