@@ -7,8 +7,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { PostKeyboardState } from "../../../modules/post/duck";
 import { UPDATE_KEYBOARD } from "../../../modules/post/duck";
-import Container from "../../../modules/common/container";
-import Warning from "../../../modules/common/warning";
+import { Container, Warning } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
