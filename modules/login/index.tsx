@@ -5,6 +5,7 @@ import { Form, Icon, Input, Button, Checkbox } from "antd";
 import Warning from "./warning";
 import { connect } from "react-redux";
 import * as actions from "../user/duck";
+import { labelStyle } from "../common";
 
 const FormItem = Form.Item;
 
@@ -23,32 +24,42 @@ const LoginForm: React.SFC<{
 	touched: any;
 }> = ({ errors, handleSubmit, handleChange, values, touched }) => (
 	<Form onSubmit={handleSubmit}>
-		<FormItem>
-			<Input
-				onChange={handleChange}
-				value={values.username}
-				type="text"
-				name="username"
-				placeholder="Username"
-				prefix={
-					<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-				}
-			/>
+		<FormItem style={{ marginBottom: 0 }}>
+			<label>
+				<div style={labelStyle}>User name</div>
+				<Input
+					onChange={handleChange}
+					value={values.username}
+					type="text"
+					name="username"
+					prefix={
+						<Icon
+							type="user"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
 			{errors.username && touched.username && (
 				<Warning message={errors.username} />
 			)}
 		</FormItem>
 		<FormItem>
-			<Input
-				onChange={handleChange}
-				value={values.password}
-				type="password"
-				name="password"
-				placeholder="Password"
-				prefix={
-					<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-				}
-			/>
+			<label>
+				<div style={labelStyle}>Password</div>
+				<Input
+					onChange={handleChange}
+					value={values.password}
+					type="password"
+					name="password"
+					prefix={
+						<Icon
+							type="lock"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
 			{errors.password && touched.password && (
 				<Warning message={errors.password} />
 			)}

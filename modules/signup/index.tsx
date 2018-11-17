@@ -1,10 +1,11 @@
 import * as React from "react";
 import { withFormik } from "formik";
 import * as yup from "yup";
+import { connect } from "react-redux";
 import { Form, Icon, Input, Button, Checkbox } from "antd";
 import Warning from "./warning";
-import { connect } from "react-redux";
 import * as actions from "../user/duck";
+import { labelStyle } from "../common";
 
 type SignupType = {
 	username?: string;
@@ -16,11 +17,6 @@ type SignupType = {
 };
 
 const FormItem = Form.Item;
-
-const labelStyle = {
-	height: "30px",
-	fontWeight: 700
-};
 
 const SignupForm: React.SFC<{
 	values: SignupType;

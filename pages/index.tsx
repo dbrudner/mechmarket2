@@ -1,6 +1,5 @@
-import axios from "axios";
+import Link from "next/link";
 import { Container } from "../modules/common";
-import { connect } from "react-redux";
 
 type Keyboard = {
 	switches?: string;
@@ -31,6 +30,9 @@ const Dashboard: React.SFC<Props> = () => (
 	<Container>
 		<h1>MechMarket</h1>
 		<h2>Buy and sell mechanical keyboards</h2>
+		<Link href="/post/keyboard/1">
+			<a>Post a keyboard</a>
+		</Link>
 	</Container>
 );
 
