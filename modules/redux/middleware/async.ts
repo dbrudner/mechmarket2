@@ -26,7 +26,7 @@ const createAsyncMiddleware = (route, method, actionType, successAction) => {
 
 export const signUp = createAsyncMiddleware(
 	"/api/signup",
-	"post",
+	"POST",
 	SIGN_UP,
 	SIGN_UP_SUCCESS
 );

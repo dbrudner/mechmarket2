@@ -4,9 +4,10 @@ module.exports = {
 	postKeyboard(app, route) {
 		app.post(route, (req, res) => {
 			const newKeyboard = { ...req.body };
-			db.Keyboard.create(newKeyboard, (err, keyboard) =>
+			db.Keyboard.create(newKeyboard, (err, keyboard) => {
+				if (err) throw err;	
 				res.json(keyboard)
-			);
+			});
 		});
 	},
 
@@ -15,8 +16,8 @@ module.exports = {
 			db.Keyboard.find()
 				.populate("userId")
 				.exec((err, keyboards) => {
-					res.json(keyboards);
 					if (err) throw err;
+					res.json(keyboards);
 				});
 		});
 	},

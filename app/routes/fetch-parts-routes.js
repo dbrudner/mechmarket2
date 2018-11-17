@@ -4,6 +4,7 @@ module.exports = {
 	getKeycaps: function(app, route) {
 		app.get(route, (req, res) => {
 			db.Keyboard.find().distinct("keycaps", (err, keycaps) => {
+				console.log(keycaps);
 				if (err) {
 					res.status(500).send("Something went wrong.");
 				}

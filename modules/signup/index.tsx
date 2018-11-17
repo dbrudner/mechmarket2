@@ -6,13 +6,20 @@ import Warning from "./warning";
 import { connect } from "react-redux";
 import * as actions from "./duck";
 
-const FormItem = Form.Item;
-
 type SignupType = {
 	username?: string;
 	password?: string;
+	password2?: string;
+	email?: string;
 	remember?: boolean;
 	signup?: (payload: { username?: string; password?: string }) => void;
+};
+
+const FormItem = Form.Item;
+
+const labelStyle = {
+	height: "30px",
+	fontWeight: 700
 };
 
 const SignupForm: React.SFC<{
@@ -23,33 +30,82 @@ const SignupForm: React.SFC<{
 	touched: any;
 }> = ({ errors, handleSubmit, handleChange, values, touched }) => (
 	<Form onSubmit={handleSubmit}>
-		<FormItem>
-			<Input
-				onChange={handleChange}
-				value={values.username}
-				type="text"
-				name="username"
-				placeholder="Username"
-				prefix={
-					<Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
-				}
-			/>
-			{errors.username &&
-				touched.username && <Warning message={errors.username} />}
+		<FormItem style={{ marginBottom: 0 }}>
+			<label>
+				<div style={labelStyle}>Username</div>
+				<Input
+					onChange={handleChange}
+					value={values.username}
+					type="text"
+					name="username"
+					prefix={
+						<Icon
+							type="user"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
+			{errors.username && touched.username && (
+				<Warning message={errors.username} />
+			)}
+		</FormItem>
+		<FormItem style={{ marginBottom: 0 }}>
+			<label>
+				<div style={labelStyle}>Email Address</div>
+				<Input
+					onChange={handleChange}
+					value={values.email}
+					type="text"
+					name="email"
+					prefix={
+						<Icon
+							type="mail"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
+			{errors.email && touched.email && (
+				<Warning message={errors.email} />
+			)}
+		</FormItem>
+		<FormItem style={{ marginBottom: 0 }}>
+			<label>
+				<div style={labelStyle}>Password</div>
+				<Input
+					onChange={handleChange}
+					value={values.password}
+					type="password"
+					name="password"
+					prefix={
+						<Icon
+							type="lock"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
 		</FormItem>
 		<FormItem>
-			<Input
-				onChange={handleChange}
-				value={values.password}
-				type="password"
-				name="password"
-				placeholder="Password"
-				prefix={
-					<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
-				}
-			/>
-			{errors.password &&
-				touched.password && <Warning message={errors.password} />}
+			<label>
+				<div style={labelStyle}>Type your password again</div>
+				<Input
+					onChange={handleChange}
+					value={values.password2}
+					type="password2"
+					name="password2"
+					prefix={
+						<Icon
+							type="lock"
+							style={{ color: "rgba(0,0,0,.25)" }}
+						/>
+					}
+				/>
+			</label>
+			{errors.password && touched.password && (
+				<Warning message={errors.password} />
+			)}
 		</FormItem>
 		<FormItem>
 			<label style={{ cursor: "pointer" }}>
@@ -71,12 +127,25 @@ const SignupFormik = withFormik<SignupType, SignupType>({
 	handleSubmit(values: SignupType, { props }) {
 		props.signup(values);
 	},
+	validate(values) {
+		if (values.password !== values.password2) {
+			return { password: "Passwords don't match" };
+		}
+	},
 	validationSchema: yup.object().shape({
 		username: yup
 			.string()
 			.min(3, "Must be at least 3 characters.")
 			.required("A username is required."),
+		email: yup
+			.string()
+			.email("Must be a valid email")
+			.required("An email address is required"),
 		password: yup
+			.string()
+			.min(6, "Passwords must be at least 6 characters.")
+			.required("Password is required."),
+		password2: yup
 			.string()
 			.min(6, "Passwords must be at least 6 characters.")
 			.required("Password is required.")

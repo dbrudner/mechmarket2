@@ -8,7 +8,7 @@ const keyboardSchema = new Schema({
 		ref: "User"
 	},
 	switches: String,
-	size: String,
+	size: {type: String, required: true},
 	layout: String,
 	custom: Boolean,
 	description: String,

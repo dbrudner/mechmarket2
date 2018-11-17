@@ -6,8 +6,8 @@ const IndexPage = () => (
 	<Container>
 		<h1>Sign up</h1>
 		<Signup />
-		<Link>
-			<a href="/login">Login</a>
+		<Link href="/login">
+			<a>Login</a>
 		</Link>
 	</Container>
 );
