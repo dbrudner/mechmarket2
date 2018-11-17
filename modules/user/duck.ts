@@ -10,24 +10,23 @@ export const LOGIN_FAILURE = "LOGIN_FAILURE";
 
 export const GET_USER = "GET_USER";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
+export const GET_USER_FAILURE = "GET_USER_FAILURE";
 
-type User = {
-	_id: string;
-	username: string;
-	password: string;
-	email: string;
-	keyboards: Keyboard[];
-};
+export type User =
+	| {
+			_id: string;
+			username: string;
+			password: string;
+			email: string;
+			keyboards: Keyboard[];
+	  }
+	| "LOGIN_SUCCESS";
 
-type InitialState = {
-	user: "LOGIN_SUCCESS" | User;
-};
-
-const initialState: InitialState = null;
+const initialState: User = null;
 
 export const userReducer = (state = initialState, action) => {
 	if (action.type === GET_USER_SUCCESS) {
-		return action.payload;
+		return action.payload || null;
 	}
 
 	if (action.type === LOGIN_SUCCESS) {
@@ -35,4 +34,16 @@ export const userReducer = (state = initialState, action) => {
 	}
 
 	return state;
+};
+
+export const getUser = () => {
+	return { type: GET_USER };
+};
+
+export const login = payload => {
+	return { type: LOGIN, payload };
+};
+
+export const signUp = payload => {
+	return { type: SIGN_UP, payload };
 };

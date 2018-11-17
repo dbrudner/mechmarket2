@@ -1,5 +1,6 @@
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
 import axios from "axios";
+import { Container } from "../modules/common";
+import { connect } from "react-redux";
 
 type Keyboard = {
 	switches?: string;
@@ -26,21 +27,11 @@ type Props = {
 	newest: Keyboard[];
 };
 
-const { Header, Content, Footer, Sider } = Layout;
-const Dashboard: React.SFC<Props> = props => {
-	return (
-		<Layout>
-			<Header />
-			<Content>
-				<h1>MechMarket</h1>
-				<h2>Buy and sell mechanical keyboards</h2>
-			</Content>
-		</Layout>
-	);
-};
-
-// Dashboard.getInitialProps = async () => (
-
-// );
+const Dashboard: React.SFC<Props> = () => (
+	<Container>
+		<h1>MechMarket</h1>
+		<h2>Buy and sell mechanical keyboards</h2>
+	</Container>
+);
 
 export default Dashboard;

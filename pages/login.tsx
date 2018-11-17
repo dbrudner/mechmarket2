@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Container from "../modules/common/container";
+import { Container } from "../modules/common";
 import Login from "../modules/login";
 import { connect } from "react-redux";
 import * as types from "../modules/user/duck";

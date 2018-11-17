@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Alert } from "antd";
 
-const Warning: React.SFC<{ message: string | React.ReactNode }> = ({
+export const Warning: React.SFC<{ message: string | React.ReactNode }> = ({
 	message
 }) => (
 	<Alert
@@ -12,5 +12,3 @@ const Warning: React.SFC<{ message: string | React.ReactNode }> = ({
 		showIcon
 	/>
 );
-
-export default Warning;

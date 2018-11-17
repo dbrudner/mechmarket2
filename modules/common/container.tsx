@@ -1,15 +1,33 @@
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { User, getUser, LOGIN_SUCCESS } from "../user";
+import { useEffect } from "react";
 
 type Props = {
 	checkIfUserLoggedIn?: boolean;
+	user: User;
+	children: React.ReactChildren;
+	getUser: any;
 };
 
 const containerStyle = { maxWidth: "960px", margin: "auto", padding: "15px" };
 
-const Container: React.SFC<Props> = ({ children, state }) => {
-	console.log(state);
+const InnerContainer: React.SFC<Props> = ({ user, children, getUser }) => {
+	if (!user || user === LOGIN_SUCCESS) {
+		useEffect(
+			() => {
+				getUser();
+			},
+			[user]
+		);
+	}
 
 	return <div style={containerStyle}>{children}</div>;
 };
 
-export default connect(state => state)(Container);
+const mapStateToProps = ({ user }) => ({ user });
+
+export const Container = connect(
+	mapStateToProps,
+	{ getUser }
+)(InnerContainer);

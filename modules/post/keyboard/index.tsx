@@ -8,8 +8,7 @@ import * as yup from "yup";
 import Size from "./size";
 import Layout from "./layout";
 import Keycaps from "./keycaps";
-import { PostKeyboardState } from "../duck";
-import { UPDATE_KEYBOARD } from "../duck";
+import { UPDATE_KEYBOARD, Keyboard } from "../";
 import TextArea from "antd/lib/input/TextArea";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";

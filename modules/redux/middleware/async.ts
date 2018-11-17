@@ -23,7 +23,6 @@ import axios from "axios";
 
 const createAsyncMiddleware = (route, method, actionType, successAction) => {
 	return store => next => async action => {
-		console.log(action);
 		if (action.type === actionType) {
 			const res =
 				method === "POST"
