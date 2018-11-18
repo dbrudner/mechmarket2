@@ -9,6 +9,7 @@ export default ({ size, layout, keycaps, description, name, images }) => {
 		centerPadding: 0,
 		speed: 500
 	};
+	console.log(images);
 	return (
 		<div>
 			<h1>{name}</h1>
@@ -22,7 +23,7 @@ export default ({ size, layout, keycaps, description, name, images }) => {
 							style={{ marginLeft: "20px" }}
 							key={`image-${image}`}
 						>
-							<img src={image} />
+							<img style={{ width: "30vw" }} src={image} />
 						</div>
 					))}
 				</Slider>

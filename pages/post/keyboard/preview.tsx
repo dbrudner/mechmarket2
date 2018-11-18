@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import SingleKeyboard from "../../../modules/single-keyboard";
-import Container from "../../../modules/common/container";
+import { Container } from "../../../modules/common";
 import { Button, Icon } from "antd";
 import { SUBMIT_KEYBOARD } from "../../../modules/post/keyboard/duck";
 import Steps from "../../../modules/post/steps";

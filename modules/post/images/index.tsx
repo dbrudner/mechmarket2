@@ -3,7 +3,8 @@ import { Icon, Input, Button, Modal, Card, List, Alert } from "antd";
 import { connect } from "react-redux";
 import Router from "next/router";
 import { UPDATE_KEYBOARD } from "../keyboard/duck";
-import Warning from "../../common/warning";
+import { Warning } from "../../common";
+import { updateKeyboard } from "../../post";
 
 type State = {
 	url: string;
@@ -173,12 +174,7 @@ const mapStateToProps = ({ postKeyboardForm: { name, images } }) => ({
 	images
 });
 
-const mapDispatchToProps = dispatch => ({
-	updateKeyboard: keyboard =>
-		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
-});
-
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{ updateKeyboard }
 )(Images);
