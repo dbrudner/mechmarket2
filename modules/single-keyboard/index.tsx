@@ -1,5 +1,6 @@
 import { Tag } from "antd";
 import Slider from "react-slick";
+import { Alert } from "antd";
 
 export default ({ size, layout, keycaps, description, name, images }) => {
 	const slickSettings = {
@@ -12,10 +13,18 @@ export default ({ size, layout, keycaps, description, name, images }) => {
 	console.log(images);
 	return (
 		<div>
-			<h1>{name}</h1>
-			<Tag color="geekblue">{size}</Tag>
-			<Tag color="purple">{layout}</Tag>
-			<Tag color="orange">{keycaps}</Tag>
+			<Alert
+				showIcon
+				style={{ marginBottom: "30px" }}
+				message="Note"
+				description={
+					<p style={{ margin: 0 }}>
+						This is a preview of your post. Click{" "}
+						<strong>Submit</strong> below to create your post or
+						<strong> Edit</strong> to change it.
+					</p>
+				}
+			/>
 			<div>
 				<Slider {...slickSettings}>
 					{images.map(image => (
@@ -28,6 +37,10 @@ export default ({ size, layout, keycaps, description, name, images }) => {
 					))}
 				</Slider>
 			</div>
+			<h2>{name}</h2>
+			<Tag color="geekblue">{size}</Tag>
+			<Tag color="purple">{layout}</Tag>
+			<Tag color="orange">{keycaps}</Tag>
 			<p
 				style={{
 					marginTop: "20px",

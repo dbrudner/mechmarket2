@@ -3,8 +3,8 @@ export const SUBMIT_KEYBOARD = "SUBMIT_KEYBOARD";
 export const SUBMIT_KEYBOARD_SUCCESS = "SUBMIT_KEYBOARD_SUCCESS";
 export const SUBMIT_KEYBOARD_FAILURE = "SUBMIT_KEYBOARD_FAILURE";
 
-export type SizeType = "Full" | "TKL" | "75%" | "60%";
-export type LayoutType = "ANSI" | "ISO";
+export type SizeType = "Full" | "TKL" | "75%" | "60%" | "";
+export type LayoutType = "ANSI" | "ISO" | "";
 export type Keyboard = {
 	size: string;
 	layout: LayoutType | "";
@@ -13,12 +13,14 @@ export type Keyboard = {
 	name: string;
 	images: string[];
 	price: number | "";
+	switches: string;
 };
 
 const initialState: Keyboard = {
 	size: "",
 	layout: "",
 	keycaps: "",
+	switches: "",
 	price: "",
 	description: "",
 	name: "",

@@ -7,7 +7,7 @@ import Steps from "../../../modules/post/steps";
 import Size from "../../../modules/post/keyboard/size";
 import Layout from "../../../modules/post/keyboard/layout";
 import Keycaps from "../../../modules/post/keyboard/keycaps";
-import { updateKeyboard } from "../../../modules/post";
+import { updateKeyboard, Keyboard } from "../../../modules/post";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
@@ -22,7 +22,7 @@ type State = {
 type Props = {
 	updateKeyboard: (keyboard: State) => void;
 	postKeyboardForm: State;
-};
+} & Keyboard;
 
 const FormItem = Form.Item;
 
@@ -36,6 +36,11 @@ class PostKeyboard2 extends React.Component<Props, State> {
 			keycaps: "",
 			switches: ""
 		};
+	}
+
+	componentDidMount() {
+		const { size, layout, keycaps, switches } = this.props;
+		this.setState({ size, layout, keycaps, switches });
 	}
 
 	handleSubmit = e => {

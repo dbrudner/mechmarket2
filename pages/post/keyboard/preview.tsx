@@ -4,17 +4,14 @@ import { Container } from "../../../modules/common";
 import { Button, Icon } from "antd";
 import { SUBMIT_KEYBOARD } from "../../../modules/post/keyboard/duck";
 import Steps from "../../../modules/post/steps";
+import Link from "next/link";
 
 const Preview = props => (
 	<Container>
 		<h1>Post a keyboard</h1>
 		<Steps stepNumber={3} />
 		<SingleKeyboard {...props.keyboard} />
-		<Button href="/post/keyboard/1">
-			Edit <Icon type="edit" />
-		</Button>
 		<Button
-			style={{ marginLeft: "20px" }}
 			type="primary"
 			onClick={() => {
 				props.submitKeyboard();
@@ -22,6 +19,13 @@ const Preview = props => (
 		>
 			Submit
 		</Button>
+		<Link href="/post/keyboard/1">
+			<a>
+				<Button style={{ marginLeft: "20px" }}>
+					Edit <Icon type="edit" />
+				</Button>
+			</a>
+		</Link>
 	</Container>
 );
 

@@ -5,24 +5,14 @@ import TextArea from "antd/lib/input/TextArea";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { updateKeyboard } from "../../../modules/post";
+import { updateKeyboard, Keyboard } from "../../../modules/post";
 import { Container, Warning, labelStyle } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
-import axios from "axios";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
 
-type State = {
-	size: string;
-	askingPrice: number | string;
-	layout: LayoutType;
-	keycaps: string;
-	switches: string;
-	description: string;
-	name: string;
-	images: string[];
-};
+type State = Keyboard;
 
 type Props = {
 	updateKeyboard: (keyboard: State) => void;
