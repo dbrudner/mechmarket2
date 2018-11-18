@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, combineReducers } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { userReducer } from "../user/duck";
 import { keycapReducer } from "../post/keyboard/keycaps/duck";
-import { postKeyboardReducer } from "../post/duck";
+import { postKeyboardReducer } from "../post/keyboard/duck";
 import {
 	fetchKeycaps,
 	signUp,

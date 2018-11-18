@@ -6,7 +6,7 @@ import Login from "../modules/login";
 import * as types from "../modules/user/duck";
 
 const IndexPage = ({ user }) => {
-	if (user === types.SIGN_UP_SUCCESS) {
+	if (user === types.SIGN_UP_SUCCESS || user === types.LOGIN_SUCCESS) {
 		Router.push("/");
 		return null;
 	}

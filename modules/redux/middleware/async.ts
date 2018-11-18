@@ -17,7 +17,7 @@ import {
 	SUBMIT_KEYBOARD,
 	SUBMIT_KEYBOARD_SUCCESS,
 	SUBMIT_KEYBOARD_FAILURE
-} from "../../post/duck";
+} from "../../post/keyboard/duck";
 
 import axios from "axios";
 

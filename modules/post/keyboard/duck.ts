@@ -7,22 +7,21 @@ export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
 export type Keyboard = {
 	size: string;
-	layout: LayoutType;
+	layout: LayoutType | "";
 	keycaps: string;
 	description: string;
 	name: string;
 	images: string[];
-	price: number;
+	price: number | "";
 };
 
 const initialState: Keyboard = {
-	size: "Full",
-	layout: "ISO",
-	keycaps: "lorem",
-	price: 1,
-	description:
-		"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-	name: "Name",
+	size: "",
+	layout: "",
+	keycaps: "",
+	price: "",
+	description: "",
+	name: "",
 	images: [
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2ibKfw9K6ntYDgzFx55xcEiOZSO7YBASCruP5R5ckNE2Sv5K",
 		"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl2ibKfw9K6ntYDgzFx55xcEiOZSO7YBASCruP5R5ckNE2Sv5K",
@@ -37,3 +36,8 @@ export const postKeyboardReducer = (state: Keyboard = initialState, action) => {
 
 	return state;
 };
+
+export const updateKeyboard = payload => ({
+	type: UPDATE_KEYBOARD,
+	payload
+});

@@ -5,9 +5,8 @@ import TextArea from "antd/lib/input/TextArea";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { PostKeyboardState } from "../../../modules/post/duck";
-import { UPDATE_KEYBOARD } from "../../../modules/post/duck";
-import { Container, Warning } from "../../../modules/common";
+import { updateKeyboard } from "../../../modules/post";
+import { Container, Warning, labelStyle } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
@@ -36,49 +35,45 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 	const getError = errors => errors[Object.keys(errors)[0]];
 
 	return (
-		<Container>
+		<Container mustBeLoggedIn>
 			<h1>Post a keyboard</h1>
-			<>
-				<Steps stepNumber={0} />
-				<Formik
-					initialValues={{
-						...postKeyboardForm
-					}}
-					onSubmit={(values, action) => {
-						updateKeyboard(values);
-						Router.push("/post/keyboard/2");
-					}}
-					validationSchema={Yup.object().shape({
-						name: Yup.string()
-							.max(50, "Name must be less than 50 characters")
-							.required("A name is required"),
-						price: Yup.string()
-							.matches(/^[0-9]*$/, "Must be a number")
-							.max(4, "Must be less than $9999"),
-						description: Yup.string().max(
-							300,
-							"Description must be less than 300 characters"
-						)
-					})}
-					render={({
-						handleSubmit,
-						handleChange,
-						values,
-						errors
-					}) => (
-						<Form onSubmit={handleSubmit}>
-							<h2>Name</h2>
-							{errors.name && <div>{errors.name}</div>}
-							<FormItem>
+			<Steps stepNumber={0} />
+			<Formik
+				initialValues={{
+					...postKeyboardForm
+				}}
+				onSubmit={(values, action) => {
+					updateKeyboard(values);
+					Router.push("/post/keyboard/2");
+				}}
+				validationSchema={Yup.object().shape({
+					name: Yup.string()
+						.max(50, "Name must be less than 50 characters")
+						.required("A name is required"),
+					price: Yup.string()
+						.matches(/^[0-9]*$/, "Must be a number")
+						.required("Asking price is required.")
+						.max(4, "Must be less than $9999"),
+					description: Yup.string().max(
+						300,
+						"Description must be less than 300 characters"
+					)
+				})}
+				render={({ handleSubmit, handleChange, values, errors }) => (
+					<Form onSubmit={handleSubmit}>
+						<FormItem style={{ marginBottom: 0 }}>
+							<label>
+								<div style={labelStyle}>Name</div>
 								<Input
 									name="name"
 									onChange={handleChange}
 									value={values.name}
 								/>
-							</FormItem>
-							<h2>Asking price</h2>
-							{errors.price && <div>{errors.price}</div>}
-							<FormItem>
+							</label>
+						</FormItem>
+						<FormItem style={{ marginBottom: 0 }}>
+							<label>
+								<div style={labelStyle}>Asking price</div>
 								<Input
 									name="price"
 									onChange={e => {
@@ -93,45 +88,39 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 									value={values.price}
 									prefix="$"
 								/>
-							</FormItem>
-							<h2>Description</h2>
-							{errors.description && (
-								<div>{errors.description}</div>
-							)}
-							<FormItem>
+							</label>
+						</FormItem>
+						<FormItem>
+							<label>
+								<div style={labelStyle}>Description</div>
 								<TextArea
 									name="description"
 									onChange={handleChange}
 									value={values.description}
 								/>
-							</FormItem>
-							{hasError(errors) && (
-								<Warning message={getError(errors)} />
-							)}
-							<Button
-								style={{ marginTop: "20px" }}
-								type="primary"
-								htmlType="submit"
-								disabled={hasError(errors)}
-							>
-								Next
-							</Button>
-						</Form>
-					)}
-				/>
-			</>
+							</label>
+						</FormItem>
+						{hasError(errors) && (
+							<Warning message={getError(errors)} />
+						)}
+						<Button
+							style={{ marginTop: "20px" }}
+							type="primary"
+							htmlType="submit"
+							disabled={hasError(errors)}
+						>
+							Next
+						</Button>
+					</Form>
+				)}
+			/>
 		</Container>
 	);
 };
-
-const mapDispatchToProps = dispatch => ({
-	updateKeyboard: keyboard =>
-		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
-});
 
 const mapStateToProps = ({ postKeyboardForm }) => ({ postKeyboardForm });
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{ updateKeyboard }
 )(PostKeyboard);

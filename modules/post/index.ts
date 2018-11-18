@@ -1,1 +1,1 @@
-export * from "./duck";
+export * from "./keyboard";

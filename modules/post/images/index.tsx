@@ -2,7 +2,7 @@ import * as React from "react";
 import { Icon, Input, Button, Modal, Card, List, Alert } from "antd";
 import { connect } from "react-redux";
 import Router from "next/router";
-import { UPDATE_KEYBOARD } from "../duck";
+import { UPDATE_KEYBOARD } from "../keyboard/duck";
 import Warning from "../../common/warning";
 
 type State = {

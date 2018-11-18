@@ -5,10 +5,9 @@ import TextArea from "antd/lib/input/TextArea";
 import { connect } from "react-redux";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import { PostKeyboardState } from "../../../modules/post/duck";
-import { UPDATE_KEYBOARD } from "../../../modules/post/duck";
-import Container from "../../../modules/common/container";
-import Warning from "../../../modules/common/warning";
+import { PostKeyboardState } from "../../../modules/post/keyboard/duck";
+import { UPDATE_KEYBOARD } from "../../../modules/post/keyboard/duck";
+import { Container, Warning } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
 import Size from "../../../modules/post/keyboard/size";
 import Layout from "../../../modules/post/keyboard/layout";
@@ -31,7 +30,7 @@ type Props = {
 
 const FormItem = Form.Item;
 
-class PostKeyboard extends React.Component<Props, State> {
+class PostKeyboard2 extends React.Component<Props, State> {
 	constructor(props) {
 		super(props);
 
@@ -106,4 +105,4 @@ const mapStateToProps = ({ postKeyboardForm }) => ({ postKeyboardForm });
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(PostKeyboard);
+)(PostKeyboard2);

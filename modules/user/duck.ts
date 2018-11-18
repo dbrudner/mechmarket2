@@ -1,4 +1,4 @@
-import { Keyboard } from "../post/duck";
+import { Keyboard } from "../post/keyboard/duck";
 
 export const SIGN_UP = "SIGN_UP";
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";

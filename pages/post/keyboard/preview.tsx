@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import SingleKeyboard from "../../../modules/single-keyboard";
 import Container from "../../../modules/common/container";
 import { Button, Icon } from "antd";
-import { SUBMIT_KEYBOARD } from "../../../modules/post/duck";
+import { SUBMIT_KEYBOARD } from "../../../modules/post/keyboard/duck";
 import Steps from "../../../modules/post/steps";
 
 const Preview = props => (
