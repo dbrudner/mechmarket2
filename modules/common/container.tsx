@@ -1,6 +1,12 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { User, getUser, LOGIN_SUCCESS, SIGN_UP_SUCCESS } from "../user";
+import {
+	User,
+	getUser,
+	LOGIN_SUCCESS,
+	SIGN_UP_SUCCESS,
+	USER_NOT_LOGGED_IN
+} from "../user";
 import { useEffect } from "react";
 import Link from "next/link";
 
@@ -21,6 +27,16 @@ const InnerContainer: React.SFC<Props> = ({
 	mustBeLoggedIn
 }) => {
 	if (mustBeLoggedIn && !user) {
+		useEffect(
+			() => {
+				getUser();
+			},
+			[user]
+		);
+		return <div>Loading</div>;
+	}
+
+	if (mustBeLoggedIn && user === USER_NOT_LOGGED_IN) {
 		return (
 			<div style={containerStyle}>
 				<h1>You must be logged in to view this page</h1>
@@ -35,15 +51,6 @@ const InnerContainer: React.SFC<Props> = ({
 					</Link>
 				</div>
 			</div>
-		);
-	}
-
-	if (!user || user === LOGIN_SUCCESS || user === SIGN_UP_SUCCESS) {
-		useEffect(
-			() => {
-				getUser();
-			},
-			[user]
 		);
 	}
 

@@ -1,24 +1,20 @@
 import * as React from "react";
 import Router from "next/router";
 import { Form, Input, Button, Icon, AutoComplete } from "antd";
-import TextArea from "antd/lib/input/TextArea";
 import { connect } from "react-redux";
-import { Formik } from "formik";
-import * as Yup from "yup";
-import { PostKeyboardState } from "../../../modules/post/keyboard/duck";
-import { UPDATE_KEYBOARD } from "../../../modules/post/keyboard/duck";
-import { Container, Warning } from "../../../modules/common";
+import { Container } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
 import Size from "../../../modules/post/keyboard/size";
 import Layout from "../../../modules/post/keyboard/layout";
 import Keycaps from "../../../modules/post/keyboard/keycaps";
+import { updateKeyboard } from "../../../modules/post";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
 
 type State = {
 	size: string;
-	layout: LayoutType;
+	layout: LayoutType | "";
 	keycaps: string;
 	switches: string;
 };
@@ -35,8 +31,8 @@ class PostKeyboard2 extends React.Component<Props, State> {
 		super(props);
 
 		this.state = {
-			size: "Full",
-			layout: "ISO",
+			size: "",
+			layout: "",
 			keycaps: "",
 			switches: ""
 		};
@@ -50,7 +46,7 @@ class PostKeyboard2 extends React.Component<Props, State> {
 
 	render() {
 		return (
-			<Container>
+			<Container mustBeLoggedIn>
 				<h1>Post a keyboard</h1>
 				<Steps stepNumber={1} />
 				<Form onSubmit={this.handleSubmit}>
@@ -95,14 +91,9 @@ class PostKeyboard2 extends React.Component<Props, State> {
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-	updateKeyboard: keyboard =>
-		dispatch({ type: UPDATE_KEYBOARD, payload: keyboard })
-});
-
 const mapStateToProps = ({ postKeyboardForm }) => ({ postKeyboardForm });
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{ updateKeyboard }
 )(PostKeyboard2);

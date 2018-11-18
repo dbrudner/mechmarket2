@@ -11,7 +11,7 @@ const IndexPage = ({ user }) => {
 		return null;
 	}
 
-	if (user) {
+	if (user && user !== types.USER_NOT_LOGGED_IN) {
 		return (
 			<Container>
 				<h1>Login</h1>

@@ -8,6 +8,7 @@ import * as Yup from "yup";
 import { updateKeyboard } from "../../../modules/post";
 import { Container, Warning, labelStyle } from "../../../modules/common";
 import Steps from "../../../modules/post/steps";
+import axios from "axios";
 
 export type SizeType = "Full" | "TKL" | "75%" | "60%";
 export type LayoutType = "ANSI" | "ISO";
@@ -30,8 +31,12 @@ type Props = {
 
 const FormItem = Form.Item;
 
-const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
+const PostKeyboard: React.SFC<Props> = ({
+	postKeyboardForm,
+	updateKeyboard
+}) => {
 	const hasError = errors => !!Object.keys(errors).length;
+	const touchedEach = touched => !!Object.keys(touched).length;
 	const getError = errors => errors[Object.keys(errors)[0]];
 
 	return (
@@ -42,7 +47,7 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 				initialValues={{
 					...postKeyboardForm
 				}}
-				onSubmit={(values, action) => {
+				onSubmit={values => {
 					updateKeyboard(values);
 					Router.push("/post/keyboard/2");
 				}}
@@ -59,7 +64,13 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 						"Description must be less than 300 characters"
 					)
 				})}
-				render={({ handleSubmit, handleChange, values, errors }) => (
+				render={({
+					handleSubmit,
+					handleChange,
+					values,
+					errors,
+					touched
+				}) => (
 					<Form onSubmit={handleSubmit}>
 						<FormItem style={{ marginBottom: 0 }}>
 							<label>
@@ -100,7 +111,7 @@ const PostKeyboard = ({ postKeyboardForm, updateKeyboard }) => {
 								/>
 							</label>
 						</FormItem>
-						{hasError(errors) && (
+						{hasError(errors) && touchedEach(touched) && (
 							<Warning message={getError(errors)} />
 						)}
 						<Button

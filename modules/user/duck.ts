@@ -12,6 +12,8 @@ export const GET_USER = "GET_USER";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAILURE = "GET_USER_FAILURE";
 
+export const USER_NOT_LOGGED_IN = "USER_NOT_LOGGED_IN";
+
 export type User =
 	| {
 			_id: string;
@@ -21,13 +23,14 @@ export type User =
 			keyboards: Keyboard[];
 	  }
 	| "LOGIN_SUCCESS"
-	| "SIGN_UP_SUCCESS";
+	| "SIGN_UP_SUCCESS"
+	| "USER_NOT_LOGGED_IN";
 
 const initialState: User = null;
 
 export const userReducer = (state = initialState, action) => {
 	if (action.type === GET_USER_SUCCESS) {
-		return action.payload || null;
+		return action.payload || USER_NOT_LOGGED_IN;
 	}
 
 	if (action.type === LOGIN_SUCCESS) {
