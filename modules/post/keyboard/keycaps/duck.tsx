@@ -9,3 +9,5 @@ export const keycapReducer = (state = [], action) => {
 
 	return state;
 };
+
+export const fetchKeycaps = () => ({ type: FETCH_KEYCAPS });

@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import Router from "next/router";
 import { Form, Input, Button, Icon, AutoComplete } from "antd";
 import { connect } from "react-redux";
@@ -9,12 +9,12 @@ import Layout from "../../../modules/post/keyboard/layout";
 import Keycaps from "../../../modules/post/keyboard/keycaps";
 import { updateKeyboard, Keyboard } from "../../../modules/post";
 
-export type SizeType = "Full" | "TKL" | "75%" | "60%";
-export type LayoutType = "ANSI" | "ISO";
+export type Size = "Full" | "TKL" | "75%" | "60%";
+export type Layout = "ANSI" | "ISO";
 
 type State = {
 	size: string;
-	layout: LayoutType | "";
+	layout: string;
 	keycaps: string;
 	switches: string;
 };
@@ -26,75 +26,65 @@ type Props = {
 
 const FormItem = Form.Item;
 
-class PostKeyboard2 extends React.Component<Props, State> {
-	constructor(props) {
-		super(props);
+const PostKeyboard2: React.SFC<Props> = ({
+	updateKeyboard,
+	postKeyboardForm
+}) => {
+	const [size, setSize] = useState(postKeyboardForm.size);
+	const [layout, setLayout] = useState(postKeyboardForm.layout);
+	const [keycaps, setKeycaps] = useState(postKeyboardForm.keycaps);
+	const [switches, setSwitches] = useState(postKeyboardForm.switches);
 
-		this.state = {
-			size: "",
-			layout: "",
-			keycaps: "",
-			switches: ""
-		};
-	}
-
-	componentDidMount() {
-		const { size, layout, keycaps, switches } = this.props;
-		this.setState({ size, layout, keycaps, switches });
-	}
-
-	handleSubmit = e => {
+	const handleSubmit = e => {
 		e.preventDefault();
-		this.props.updateKeyboard({ ...this.state });
+		updateKeyboard({ size, layout, keycaps, switches });
 		Router.push("/post/keyboard/3");
 	};
 
-	render() {
-		return (
-			<Container mustBeLoggedIn>
-				<h1>Post a keyboard</h1>
-				<Steps stepNumber={1} />
-				<Form onSubmit={this.handleSubmit}>
-					<h2>Size</h2>
-					<FormItem>
-						<Size
-							selectedSize={this.state.size as SizeType}
-							handleChange={size => this.setState({ size })}
-						/>
-					</FormItem>
-					<h2>Layout</h2>
-					<FormItem>
-						<Layout
-							selectedLayout={this.state.layout}
-							handleChange={layout => this.setState({ layout })}
-						/>
-					</FormItem>
-					<h2>Keycaps</h2>
-					<FormItem>
-						<Keycaps
-							handleChange={keycaps => this.setState({ keycaps })}
-						/>
-					</FormItem>
-					<h2>Switches</h2>
-					<FormItem>
-						<Input
-							onChange={e =>
-								this.setState({ switches: e.target.value })
-							}
-						/>
-					</FormItem>
-					<Button
-						style={{ marginTop: "20px" }}
-						type="primary"
-						htmlType="submit"
-					>
-						Next
-					</Button>
-				</Form>
-			</Container>
-		);
-	}
-}
+	return (
+		<Container mustBeLoggedIn>
+			<h1>Post a keyboard</h1>
+			<Steps stepNumber={1} />
+			<Form onSubmit={handleSubmit}>
+				<h2>Size</h2>
+				<FormItem>
+					<Size
+						selectedSize={size as Size}
+						handleChange={size => setSize(size)}
+					/>
+				</FormItem>
+				<h2>Layout</h2>
+				<FormItem>
+					<Layout
+						selectedLayout={layout as Layout}
+						handleChange={layout => setLayout(layout)}
+					/>
+				</FormItem>
+				<h2>Keycaps</h2>
+				<FormItem>
+					<Keycaps
+						value={keycaps}
+						handleChange={keycaps => setKeycaps(keycaps)}
+					/>
+				</FormItem>
+				<h2>Switches</h2>
+				<FormItem>
+					<Input
+						value={switches}
+						onChange={e => setSwitches(e.target.value)}
+					/>
+				</FormItem>
+				<Button
+					style={{ marginTop: "20px" }}
+					type="primary"
+					htmlType="submit"
+				>
+					Next
+				</Button>
+			</Form>
+		</Container>
+	);
+};
 
 const mapStateToProps = ({ postKeyboardForm }) => ({ postKeyboardForm });
 

@@ -1,36 +1,28 @@
-import * as React from "react";
+import { useEffect } from "react";
 import { AutoComplete } from "antd";
 import { connect } from "react-redux";
-import * as actions from "./duck";
+import { fetchKeycaps } from "./duck";
 
-type KeycapsProps = {
+type Props = {
 	handleChange: () => void;
 	fetchKeycaps: () => void;
 	keycaps: string[];
+	value: string;
 };
 
-type KeycapsState = {
-	dataSource: string[];
+const Keycaps: React.SFC<Props> = ({ handleChange, fetchKeycaps, value }) => {
+	useEffect(() => {
+		fetchKeycaps();
+	});
+
+	return (
+		<AutoComplete
+			onChange={handleChange}
+			dataSource={["blah"]}
+			value={value}
+		/>
+	);
 };
-
-class Keycaps extends React.Component<KeycapsProps, KeycapsState> {
-	componentDidMount() {
-		this.props.fetchKeycaps();
-	}
-
-	render() {
-		return (
-			<AutoComplete
-				onChange={this.props.handleChange}
-				dataSource={["blah"]}
-			/>
-		);
-	}
-}
-
-const mapDispatchToProps = dispatch => ({
-	fetchKeycaps: () => dispatch({ type: actions.FETCH_KEYCAPS })
-});
 
 const mapStateToProps = state => ({
 	keycaps: state.keycaps
@@ -38,5 +30,5 @@ const mapStateToProps = state => ({
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	{ fetchKeycaps }
 )(Keycaps);
