@@ -6,7 +6,8 @@ import Login from "../modules/login";
 import {
 	SIGN_UP_SUCCESS,
 	LOGIN_SUCCESS,
-	USER_NOT_AUTHORIZED
+	USER_NOT_AUTHORIZED,
+	LOGIN_FAILURE
 } from "../modules/user";
 
 const IndexPage = ({ user }) => {
@@ -15,7 +16,7 @@ const IndexPage = ({ user }) => {
 		return null;
 	}
 
-	if (user && user !== USER_NOT_AUTHORIZED) {
+	if (user && user !== USER_NOT_AUTHORIZED && user !== LOGIN_FAILURE) {
 		return (
 			<Container>
 				<h1>Login</h1>
