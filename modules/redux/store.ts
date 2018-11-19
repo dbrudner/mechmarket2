@@ -8,7 +8,8 @@ import {
 	signUp,
 	login,
 	postKeyboard,
-	getUser
+	getUser,
+	logout
 } from "./middleware/async";
 
 const rootReducer = combineReducers({
@@ -21,7 +22,14 @@ export function initializeStore() {
 	return createStore(
 		rootReducer,
 		composeWithDevTools(
-			applyMiddleware(fetchKeycaps, signUp, postKeyboard, login, getUser)
+			applyMiddleware(
+				fetchKeycaps,
+				signUp,
+				postKeyboard,
+				login,
+				getUser,
+				logout
+			)
 		)
 	);
 }

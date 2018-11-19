@@ -2,6 +2,9 @@ import {
 	LOGIN_FAILURE,
 	LOGIN_SUCCESS,
 	LOGIN,
+	LOGOUT_FAILURE,
+	LOGOUT_SUCCESS,
+	LOGOUT,
 	SIGN_UP_FAILURE,
 	SIGN_UP_SUCCESS,
 	SIGN_UP,
@@ -61,6 +64,14 @@ export const login = createAsyncMiddleware(
 	LOGIN,
 	LOGIN_SUCCESS,
 	LOGIN_FAILURE
+);
+
+export const logout = createAsyncMiddleware(
+	"/api/logout",
+	"GET",
+	LOGOUT,
+	LOGOUT_SUCCESS,
+	LOGOUT_FAILURE
 );
 
 export const getUser = createAsyncMiddleware(

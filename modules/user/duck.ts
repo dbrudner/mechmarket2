@@ -12,6 +12,10 @@ export const GET_USER = "GET_USER";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAILURE = "GET_USER_FAILURE";
 
+export const LOGOUT_FAILURE = "LOGOUT_FAILURE";
+export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
+export const LOGOUT = "LOGOUT";
+
 export const USER_NOT_AUTHORIZED = "USER_NOT_AUTHORIZED";
 
 export type User =
@@ -45,11 +49,19 @@ export const userReducer = (state = initialState, action) => {
 		return LOGIN_FAILURE;
 	}
 
+	if (action.type === LOGOUT_SUCCESS) {
+		return null;
+	}
+
 	return state;
 };
 
 export const getUser = () => {
 	return { type: GET_USER };
+};
+
+export const logout = () => {
+	return { type: LOGOUT };
 };
 
 export const login = payload => {

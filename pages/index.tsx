@@ -33,6 +33,9 @@ const Dashboard: React.SFC<Props> = () => (
 		<Link href="/post/keyboard/1">
 			<a>Post a keyboard</a>
 		</Link>
+		<Link href="/logout">
+			<a>Logout</a>
+		</Link>
 	</Container>
 );
 

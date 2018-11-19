@@ -15,6 +15,7 @@ module.exports = {
 
 	logout: function(app, route) {
 		app.get(route, (req, res) => {
+			req.logout();
 			res.json("logging out");
 		});
 	},
