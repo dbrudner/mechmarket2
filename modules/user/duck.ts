@@ -12,7 +12,7 @@ export const GET_USER = "GET_USER";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
 export const GET_USER_FAILURE = "GET_USER_FAILURE";
 
-export const USER_NOT_LOGGED_IN = "USER_NOT_LOGGED_IN";
+export const USER_NOT_AUTHORIZED = "USER_NOT_AUTHORIZED";
 
 export type User =
 	| {
@@ -24,13 +24,13 @@ export type User =
 	  }
 	| "LOGIN_SUCCESS"
 	| "SIGN_UP_SUCCESS"
-	| "USER_NOT_LOGGED_IN";
+	| "USER_NOT_AUTHORIZED";
 
 const initialState: User = null;
 
 export const userReducer = (state = initialState, action) => {
 	if (action.type === GET_USER_SUCCESS) {
-		return action.payload || USER_NOT_LOGGED_IN;
+		return action.payload || USER_NOT_AUTHORIZED;
 	}
 
 	if (action.type === LOGIN_SUCCESS) {
@@ -39,6 +39,10 @@ export const userReducer = (state = initialState, action) => {
 
 	if (action.type === SIGN_UP_SUCCESS) {
 		return SIGN_UP_SUCCESS;
+	}
+
+	if (action.type === LOGIN_FAILURE) {
+		return LOGIN_FAILURE;
 	}
 
 	return state;

@@ -3,15 +3,19 @@ import Router from "next/router";
 import { connect } from "react-redux";
 import { Container } from "../modules/common";
 import Login from "../modules/login";
-import * as types from "../modules/user/duck";
+import {
+	SIGN_UP_SUCCESS,
+	LOGIN_SUCCESS,
+	USER_NOT_AUTHORIZED
+} from "../modules/user";
 
 const IndexPage = ({ user }) => {
-	if (user === types.SIGN_UP_SUCCESS || user === types.LOGIN_SUCCESS) {
+	if (user === SIGN_UP_SUCCESS || user === LOGIN_SUCCESS) {
 		Router.push("/");
 		return null;
 	}
 
-	if (user && user !== types.USER_NOT_LOGGED_IN) {
+	if (user && user !== USER_NOT_AUTHORIZED) {
 		return (
 			<Container>
 				<h1>Login</h1>

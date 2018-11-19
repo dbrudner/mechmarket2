@@ -4,7 +4,7 @@ import {
 	getUser,
 	LOGIN_SUCCESS,
 	SIGN_UP_SUCCESS,
-	USER_NOT_LOGGED_IN
+	USER_NOT_AUTHORIZED
 } from "../user";
 import { useEffect } from "react";
 import Link from "next/link";
@@ -35,7 +35,7 @@ const InnerContainer: React.SFC<Props> = ({
 		return <div>Loading</div>;
 	}
 
-	if (mustBeLoggedIn && user === USER_NOT_LOGGED_IN) {
+	if (mustBeLoggedIn && user === USER_NOT_AUTHORIZED) {
 		return (
 			<div style={containerStyle}>
 				<h1>You must be logged in to view this page</h1>
